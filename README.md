@@ -1,2 +1,2 @@
 # cyberpunkCTF
-A CTF framework build on python using django, graphql and react
+A CTF framework built on python using django, graphql and react
