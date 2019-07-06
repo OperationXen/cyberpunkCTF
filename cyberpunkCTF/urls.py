@@ -3,7 +3,7 @@ from django.urls import path, re_path, include
 from django.views.decorators.csrf import csrf_exempt
 
 from core.views import PrivateGraphQLView
-from core.schema import schema as ctfschema
+from core.schema.schema import ctfschema
 
 
 urlpatterns = [
