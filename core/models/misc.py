@@ -8,6 +8,8 @@ class Category(models.Model):
     title = CharField(max_length=256, blank=False, help_text="Name of category")
     order = IntegerField(null=True, help_text="Ordering override")
 
+    def __str__(self):
+        return self.title
 
 class Tag(models.Model):
     """ Tags allow challenges to be grouped """

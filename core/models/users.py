@@ -3,8 +3,6 @@ from django.db import models
 from django.db.models import ForeignKey, ManyToManyField
 from django.db.models.fields import *
 
-from .hints import Hint
-
 
 class CTFUser(AbstractUser):
     """ Customisable user model """

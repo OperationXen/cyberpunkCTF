@@ -13,8 +13,10 @@ class BaseFlag(models.Model):
     value = CharField(max_length=1024, blank=True, help_text="The value to check for")
     exact = BooleanField(default=False, help_text="Set true for exact matching, otherwise flag is awarded if value appears anywhere")
     regex = BooleanField(default=False, help_text="True if flag is checked with a regex")
-    attempts = IntegerField(default=0)
+    attempts = IntegerField(default=0, null=True, blank=True, help_text="If set, limits number of attempts")
 
+    def __str__(self):
+        return f"{self.challenge} - {self.title}"
 
 class FileFlag(BaseFlag):
     """ A more advanced flag which allows for file submission """
