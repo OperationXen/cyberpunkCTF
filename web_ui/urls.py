@@ -3,5 +3,5 @@ from web_ui.views import MainView
 
 
 urlpatterns = [
-    re_path("^/?$", MainView.as_view()),
+    re_path(".*", MainView.as_view()),
 ]
