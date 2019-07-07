@@ -1,12 +1,15 @@
+# project specific
+
+*/migrations/*
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
-*.so
-
 # Distribution / packaging
+.idea/
 .Python
 build/
 develop-eggs/
