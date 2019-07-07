@@ -12,3 +12,10 @@ class CategoryType(DjangoObjectType):
 class CategoryQuery(graphene.ObjectType):
     """ GraphQL queries for categories """
     all_categories = graphene.List(CategoryType)
+    category = graphene.Field(CategoryType, id=graphene.Int())
+
+    def resolve_all_categories(self, info, **kwargs):
+        return Category.objects.all()
+
+    def resolve_category(self, info, id, **kwaargs):
+        return Category.object.get(pk=id)

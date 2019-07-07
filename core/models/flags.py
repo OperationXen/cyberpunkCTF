@@ -6,7 +6,7 @@ from django.db.models.fields import *
 # Flags and related models
 class BaseFlag(models.Model):
     """ A basic flag type """
-    challenge = ForeignKey("BaseChallenge", on_delete=models.CASCADE, help_text="The challenge this flag is for")
+    challenge = ForeignKey("BaseChallenge", on_delete=models.CASCADE, related_name="flags", help_text="The challenge this flag is for")
 
     title = CharField(max_length=256, blank=True, help_text="[Optional] a title for the flag itself")
     guide = CharField(max_length=256, blank=False, default="flag{cyberpunkCTF}", help_text="Flag formatting guide")
