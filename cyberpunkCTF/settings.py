@@ -40,12 +40,14 @@ INSTALLED_APPS = [
 
     # libraries and addons
     'graphene_django',
+    'corsheaders',
 
     # apps in this project
     'core',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -107,18 +109,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# CORS settings
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',                        # Development NODE.js server
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
+LANGUAGE_CODE = 'en-GB'
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 

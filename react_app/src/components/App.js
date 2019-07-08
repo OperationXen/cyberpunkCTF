@@ -1,6 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from '../logo.svg';
+import '../styles/App.css';
+
+import ReactDOM from 'react-dom';
+import Button from '@material-ui/core/Button';
+
+import CTFCategoryTest from './category_test'
+
 
 function App() {
   return (
@@ -18,6 +24,12 @@ function App() {
         >
           Learn React
         </a>
+
+        <CTFCategoryTest />
+
+        <Button variant="contained" color="primary">
+          Hello World
+        </Button>
       </header>
     </div>
   );
