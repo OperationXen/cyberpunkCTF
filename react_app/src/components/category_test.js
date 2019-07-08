@@ -5,16 +5,14 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
 const CATEGORIES_QUERY = gql`
-  {
-    query{
+    {
       allCategories{
         id
         title
         order
       }
     }
-  }
-`
+`;
 
 
 class CTFCategoryTest extends Component {
@@ -28,7 +26,7 @@ class CTFCategoryTest extends Component {
                 return <div>Error</div>
             }
 
-            const stuffToRender = data.query.all_categories
+            const stuffToRender = data.allCategories
 
             return (
               <div>
