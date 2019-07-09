@@ -1,42 +1,23 @@
-import React, { Component } from 'react'
-import CTFCategory from './category'
+import React, { Component } from "react";
+import CTFCategory from "./category";
+import CATEGORIES_QUERY from "../queries/categories.query";
+import { Query } from "react-apollo";
 
-import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
+const CTFCategoryTest = props => (
+  <Query query={CATEGORIES_QUERY}>
+    {({ loading, error, data }) => {
+      if (loading) return <div>Fetching...</div>;
+      if (error) return <div>Error: {error.message}</div>;
 
-const CATEGORIES_QUERY = gql`
-    {
-      allCategories{
-        id
-        title
-        order
-      }
-    }
-`;
-
-
-class CTFCategoryTest extends Component {
-  render() {
       return (
-        <Query query={CATEGORIES_QUERY}>{
-        ({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>
-            if (error) {
-                alert(error)
-                return <div>Error</div>
-            }
+        <div>
+          {data.allCategories.map(category => (
+            <CTFCategory key={category.id} category={category} />
+          ))}
+        </div>
+      );
+    }}
+  </Query>
+);
 
-            const stuffToRender = data.allCategories
-
-            return (
-              <div>
-                {stuffToRender.map(category => <CTFCategory key={category.id} category={category} />)}
-              </div>
-            )
-          }}
-        </Query>
-      )
-  }
-}
-
-export default CTFCategoryTest
+export default CTFCategoryTest;
