@@ -1,15 +1,21 @@
-import React from 'react'
-import AppBar from '@material-ui/core/AppBar';
-import '../styles/components/titlebar.css'
+import React from "react";
+import { AppBar, Typography } from "@material-ui/core";
+import pink from "@material-ui/core/colors/pink";
+import { withStyles } from "@material-ui/core/styles";
+import "../styles/components/titlebar.css";
 
-class TitleBar extends React.Component{
-    render(){
-        return(
-            <AppBar className="titleBar">
-                pew
-            </AppBar>
-        )
-    }
-}
+const styles = theme => ({
+  titleBar: {
+    backgroundColor: pink[300]
+  }
+});
 
-export default TitleBar
+const TitleBar = ({ classes }) => {
+  return (
+    <AppBar className={classes.titleBar}>
+      <Typography>Pew</Typography>
+    </AppBar>
+  );
+};
+
+export default withStyles(styles)(TitleBar);
