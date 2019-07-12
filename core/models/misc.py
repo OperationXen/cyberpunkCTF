@@ -6,7 +6,7 @@ from django.db.models.fields import *
 class Category(models.Model):
     """ Thematic grouping of challenges under a single heading """
     title = CharField(max_length=256, blank=False, help_text="Name of category")
-    order = IntegerField(null=True, help_text="Ordering override")
+    order = IntegerField(null=True, blank=True, help_text="Ordering override")
 
     def __str__(self):
         return self.title

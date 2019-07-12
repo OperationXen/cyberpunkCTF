@@ -18,21 +18,17 @@ const CATEGORIES_QUERY = gql`
 class CTFCategoryTest extends Component {
   render() {
       return (
-        <Query query={CATEGORIES_QUERY}>{
+        <Query query={CATEGORIES_QUERY} pollInterval={60000}>{
         ({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>
-            if (error) {
-                alert(error)
-                return <div>Error</div>
-            }
+          if (loading) return <div>Fetching</div>
+          if (error) return <div>Error</div>
 
-            const stuffToRender = data.allCategories
-
-            return (
-              <div>
-                {stuffToRender.map(category => <CTFCategory key={category.id} category={category} />)}
-              </div>
-            )
+          const stuffToRender = data.allCategories
+          return (
+            <div>
+              {stuffToRender.map(category => <CTFCategory key={category.id} category={category} />)}
+            </div>
+          )
           }}
         </Query>
       )

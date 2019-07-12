@@ -5,12 +5,14 @@ import '../styles/App.css';
 import ReactDOM from 'react-dom';
 import Button from '@material-ui/core/Button';
 
+import TitleBar from './titlebar'
 import CTFCategoryTest from './category_test'
 
 
 function App() {
   return (
     <div className="App">
+        <TitleBar />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
