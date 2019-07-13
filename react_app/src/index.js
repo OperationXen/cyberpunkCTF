@@ -1,12 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import ReactDOM from 'react-dom'
+import { ApolloProvider } from 'react-apollo'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import App from './components/App'
+import apolloClient from './Apollo'
+import cyberpunkTheme from './Theme'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+    <ApolloProvider client={apolloClient}>
+        <MuiThemeProvider theme={cyberpunkTheme}>
+            <App />
+        </MuiThemeProvider>
+    </ApolloProvider>,
+    document.getElementById('root')
+)
