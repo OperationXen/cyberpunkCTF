@@ -31,13 +31,13 @@ export default function CTFCategory(props)
                     alignItems="center"
                 >
                     <Grid item xs={3}>
-                        <ChallengeCard title={"herp"} />
+                        <ChallengeCard title={"herp"} points={10} slug="Lorem ipsum sit dolor amet"/>
                     </Grid>
                     <Grid item xs={3}>
-                        <ChallengeCard title={"derp"} />
+                        <ChallengeCard title={"derp"} points={100} slug="Lorem ipsum sit dolor amet"/>
                     </Grid>
                     <Grid item xs={3}>
-                        <ChallengeCard title={"pew pew"} />
+                        <ChallengeCard title={"pew pew"} points={1000} slug="Lorem ipsum sit dolor amet" />
                     </Grid>
                 </Grid>
                 <Divider variant="middle" />
