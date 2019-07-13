@@ -12,6 +12,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(0.3)
   },
+  titleText: {
+    fontWeight: "bold"
+  },
 }));
 
 export default function CTFCategory(props)
@@ -21,7 +24,7 @@ export default function CTFCategory(props)
     return(
         <Grid item xs={6}>
             <Paper className={classes.root}>
-                <Typography>{props.category.title}</Typography>
+                <Typography variant="h5" className={classes.titleText}>{props.category.title}</Typography>
                 <Divider variant="middle" />
                 <Grid
                     container
@@ -41,7 +44,7 @@ export default function CTFCategory(props)
                     </Grid>
                 </Grid>
                 <Divider variant="middle" />
-                <Typography>
+                <Typography variant="caption">
                     I get knocked down, but I get up again, you aint ever gonna keep me down
                 </Typography>
             </Paper>
