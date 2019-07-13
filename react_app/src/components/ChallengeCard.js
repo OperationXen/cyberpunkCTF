@@ -9,10 +9,7 @@ import Divider from '@material-ui/core/Divider'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    margin: "0.5em",
-  },
-  divider: {
-    margin: "0.2em",
+    margin: theme.spacing(),
   },
 }));
 

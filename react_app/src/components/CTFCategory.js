@@ -10,7 +10,7 @@ import ChallengeCard from './ChallengeCard'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: "0.3em",
+    padding: theme.spacing(0.3)
   },
 }));
 

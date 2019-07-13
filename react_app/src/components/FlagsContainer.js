@@ -20,25 +20,9 @@ const GET_ALL_CATEGORIES_QUERY = gql`
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: "1em",
+    padding: theme.spacing(0.3)
   },
 }));
-
-function getCategories(){
-    return(
-        <Query query={GET_ALL_CATEGORIES_QUERY} pollInterval={60000}>{
-            ({ loading, error, data }) => {
-              if (loading) return <div>Fetching</div>
-              if (error) return <div>Error</div>
-
-              const stuffToRender = data.allCategories
-              return (
-                  stuffToRender.map(category => <CTFCategory key={category.id} category={category} />)
-              )
-              }}
-        </Query>
-    )
-}
 
 export default function FlagsContainer(props){
     const classes = useStyles();
@@ -52,7 +36,16 @@ export default function FlagsContainer(props){
             justify="space-around"
             alignItems="center"
         >
-        {getCategories()}
+            <Query query={GET_ALL_CATEGORIES_QUERY} pollInterval={60000}>{
+                ({ loading, error, data }) => {
+                  if (loading) return <div>Fetching</div>
+                  if (error) return <div>Error</div>
+
+                  return (
+                      data.allCategories.map(category => <CTFCategory key={category.id} category={category} />)
+                  )
+            }}
+            </Query>
         </Grid>
     </div>
   )
