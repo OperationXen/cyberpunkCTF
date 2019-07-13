@@ -20,7 +20,7 @@ const GET_ALL_CATEGORIES_QUERY = gql`
 
 const useStyles = makeStyles(theme => ({
   root: {
-    paddingTop: "1em",
+    padding: "1em",
   },
 }));
 
