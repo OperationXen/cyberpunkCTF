@@ -24,29 +24,32 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function FlagsContainer(props){
+export default function GameContainer(props) {
   const classes = useStyles();
 
-  return(
+  return (
     <div className={classes.root}>
-        <Grid
-            container
-            spacing = {3}
-            direction="row"
-            justify="space-around"
-            alignItems="center"
-        >
-            <Query query={GET_ALL_CATEGORIES_QUERY} pollInterval={60000}>{
-                ({ loading, error, data }) => {
-                  if (loading) return <div>Fetching</div>
-                  if (error) return <div>Error</div>
+      <Grid
+        container
+        spacing={3}
+        direction="row"
+        justify="space-around"
+        alignItems="center"
+      >
+        <Query query={GET_ALL_CATEGORIES_QUERY} pollInterval={60000}>{
+          ({ loading, error, data }) => {
+            if (loading) return <div>Fetching</div>
+            if (error) return <div>Error</div>
 
-                  return (
-                      data.allCategories.map(category => <CTFCategory key={category.id} category={category} />)
-                  )
-            }}
-            </Query>
-        </Grid>
+            return data.allCategories.map(category => (
+                <Grid item lg={6}>
+                  <CTFCategory key={category.id} category={category} />
+                </Grid>
+              )
+            )
+          }}
+        </Query>
+      </Grid>
     </div>
   )
 }

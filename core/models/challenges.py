@@ -14,6 +14,7 @@ class BaseChallenge(models.Model):
     category = ForeignKey("Category", null=True, blank=True, related_name="challenges", on_delete=models.PROTECT, help_text="Category for the challenge")
     content = TextField(blank=False, help_text="Text of the challenge")
     image = ImageField(null=True, blank=True, help_text="[Optional] Image file to display")
+    slug = CharField(max_length=128, blank=True, help_text="[Optional] A brief synopsis of the challenge")
 
     # A challenge can require other challenges to be solved first
     prerequisites = ManyToManyField("BaseChallenge", blank=True, related_name="challenges", help_text="Any prerequisites for the challenge")

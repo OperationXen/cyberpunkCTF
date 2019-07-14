@@ -5,15 +5,14 @@ import Button from '@material-ui/core/Button'
 
 import '../styles/App.css'
 import TitleBar from './TitleBar'
-import FlagsContainer from './FlagsContainer'
-
+import GameContainer from './GameContainer'
 
 function App() {
   return (
     <div className="App">
       <TitleBar title={"pew"}/>
 
-      <FlagsContainer />
+      <GameContainer />
 
     </div>
   );
