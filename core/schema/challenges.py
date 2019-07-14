@@ -25,7 +25,6 @@ class ChallengeQuery(graphene.ObjectType):
     challenge = graphene.Field(ChallengeType, id=graphene.Int())
 
     def resolve_all_challenges(self, info, category=None, **kwargs):
-        print(category)
         if not category:
             return BaseChallenge.objects.all()
         else:
