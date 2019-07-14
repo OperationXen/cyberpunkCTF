@@ -12,8 +12,8 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
 const GET_ALL_CHALLENGES_QUERY = gql`
-    query Challenges($var: String) {
-      allChallenges(category: $var){
+    query Challenges($cat: String) {
+      allChallenges(category: $cat){
         id
         title
         points
@@ -46,7 +46,7 @@ export default function CTFCategory(props) {
                 justify="space-around"
                 alignItems="center"
             >
-                <Query query={GET_ALL_CHALLENGES_QUERY} variables={props.category.title} pollInterval={45000}>{
+                <Query query={GET_ALL_CHALLENGES_QUERY} variables={{cat: props.category.title}} pollInterval={45000}>{
                     ({ loading, error, data }) => {
                         if (loading) return <div>Loading</div>
                         if (error) return <div>Error</div>
