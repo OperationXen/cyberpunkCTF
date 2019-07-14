@@ -1,0 +1,20 @@
+.LoginWidget
+{
+    margin-top: 20vh;
+}
+
+.LoginBanner
+{
+    padding: 1em;
+}
+
+.LoginForm
+{
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+.inputField
+{
+    width: 80%;
+}

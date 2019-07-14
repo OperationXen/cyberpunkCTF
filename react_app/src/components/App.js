@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button'
 
 import '../styles/App.css'
 import TitleBar from './TitleBar'
+import LoginGizmo from './Login'
 import GameContainer from './GameContainer'
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
     <div className="App">
       <TitleBar title={"pew"}/>
 
-      <GameContainer />
+      <LoginGizmo /> 
 
     </div>
   );
