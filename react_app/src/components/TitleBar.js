@@ -32,8 +32,7 @@ export default function TitleBar(props) {
           <Typography variant="h6" className={classes.title}>
             {props.title}
           </Typography>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Register</Button>
+          {!props.authenticated && <Button color="inherit">Register</Button>}
         </Toolbar>
       </AppBar>
     </div>
