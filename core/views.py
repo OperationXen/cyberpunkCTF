@@ -1,11 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from graphene_django.views import GraphQLView
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.generic import View
-from json import dumps
-
 from core.models.users import CTFUser
 
 
@@ -23,7 +21,7 @@ class AuthCheckView(View):
             "isAdmin": request.user.is_staff,
             "userName": request.user.username,
         }
-        return HttpResponse(dumps(user_dict))
+        return JsonResponse(user_dict)
 
 
 class AuthLoginView(View):
@@ -39,9 +37,16 @@ class AuthLoginView(View):
                 # set the user in the session to be handed back to the user
                 login(request, user)
                 dict["message"] = "Successfully authenticated"
-                return HttpResponse(dumps(dict), status=200)
+                return JsonResponse(dict, status=200)
 
         except Exception as e:
             pass
         dict["message"] = "Username or password incorrect, or perhaps everyone secretly hates you?"
-        return HttpResponse(dumps(dict), status=401)
+        return JsonResponse(dict, status=401)
+
+
+class LogOutView(View):
+    """ Logs out the current user, invalidating their session """
+    def post(self, request):
+        logout(request)
+        return JsonResponse({"message": "Logged out"})
