@@ -37,7 +37,7 @@ class LoginGizmo extends Component {
         fetch('http://127.0.0.1:8000/login', {
             method: 'POST',
             body: new FormData(event.target),
-        }).then(response => code = response.status && response.json()).then(response => {
+        }).then(response => response.json()).then(response => {
             if (response.status == 200){
                 alert("logged in OK")
             }else{
