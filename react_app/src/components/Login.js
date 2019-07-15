@@ -14,7 +14,11 @@ import '../styles/Login.css'
 class LoginGizmo extends Component {
     constructor(props) {
         super(props)
-        this.state = { userName: "", password: "" }
+        this.state = { 
+            userName: "", 
+            password: "",
+            message: "" 
+        }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }
@@ -30,9 +34,15 @@ class LoginGizmo extends Component {
     handleSubmit(event) {
         event.preventDefault()
 
-        fetch('/login', {
+        fetch('http://127.0.0.1:8000/login', {
             method: 'POST',
             body: new FormData(event.target),
+        }).then(response => code = response.status && response.json()).then(response => {
+            if (response.status == 200){
+                alert("logged in OK")
+            }else{
+                this.setState({password: "", message: response.message})
+            }
         });
     }
 
@@ -44,7 +54,6 @@ class LoginGizmo extends Component {
                         <Typography variant="h5">Authentication Required</Typography>
                     </div>
                     <Divider variant="middle" />
-                    
 
                     <form onSubmit={this.handleSubmit} className="LoginForm">
 
@@ -53,7 +62,7 @@ class LoginGizmo extends Component {
                             id="outlined-email-input"
                             name="userName"
                             label="Username / eMail"
-                            type="email"
+                            type="text"
                             autoComplete="email"
                             margin="normal"
                             variant="outlined"
