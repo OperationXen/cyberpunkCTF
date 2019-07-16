@@ -14,10 +14,10 @@ import '../styles/Login.css'
 class LoginGizmo extends Component {
     constructor(props) {
         super(props)
-        this.state = { 
-            userName: "", 
+        this.state = {
+            userName: "",
             password: "",
-            message: "" 
+            message: ""
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -28,7 +28,7 @@ class LoginGizmo extends Component {
     }
 
     handleChange(event) {
-        this.setState({ [event.target.name]: event.target.value })
+        this.setState({ [event.target.name]: event.target.value, message: "" })
     }
 
     handleSubmit(event) {
@@ -36,12 +36,14 @@ class LoginGizmo extends Component {
 
         fetch('http://127.0.0.1:8000/login', {
             method: 'POST',
+            mode: 'cors',
             body: new FormData(event.target),
-        }).then(response => response.json()).then(response => {
-            if (response.status == 200){
-                alert("logged in OK")
-            }else{
-                this.setState({password: "", message: response.message})
+        }).then(function (response) {
+            let status = response.status
+            response = response.json()
+
+            if (status != 200) {
+                this.setState({ password: "", message: response.message })
             }
         });
     }
@@ -58,7 +60,7 @@ class LoginGizmo extends Component {
                     <form onSubmit={this.handleSubmit} className="LoginForm">
 
                         <TextField
-                            className = "inputField"
+                            className="inputField"
                             id="outlined-email-input"
                             name="userName"
                             label="Username / eMail"
@@ -66,12 +68,12 @@ class LoginGizmo extends Component {
                             autoComplete="email"
                             margin="normal"
                             variant="outlined"
-                            value = {this.state.userName}
-                            onChange = {this.handleChange}
+                            value={this.state.userName}
+                            onChange={this.handleChange}
                         />
                         <br />
                         <TextField
-                            className = "inputField"
+                            className="inputField"
                             id="outlined-password-input"
                             label="Password"
                             type="password"
@@ -79,9 +81,11 @@ class LoginGizmo extends Component {
                             autoComplete="current-password"
                             margin="normal"
                             variant="outlined"
-                            value = {this.state.password}
-                            onChange = {this.handleChange}
+                            value={this.state.password}
+                            onChange={this.handleChange}
                         />
+                        <br />
+                        {this.state.message && <Typography variant="caption" color="error">{this.state.message}</Typography>}
                         <br />
                         <Button
                             color="primary"

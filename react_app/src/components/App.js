@@ -17,9 +17,12 @@ class App extends Component {
       isAdmin: false
     }
   }
-
+  
   componentDidMount() {
-    fetch("http://127.0.0.1:8000/authcheck").then(result => result.json()).then((result) => {
+    fetch('http://127.0.0.1:8000/authcheck', {
+      credentials: 'include',
+      mode: 'cors',
+    }).then(result => result.json()).then((result) => {
       this.setState({
         isAuthenticated: result.isAuthenticated ? true:false,
           userName: result.userName,
@@ -40,7 +43,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <TitleBar title={"pew"} />
+        <TitleBar title={"pew"} authenticated={this.state.isAuthenticated} />
 
         {content}
 
