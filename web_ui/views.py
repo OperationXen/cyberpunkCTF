@@ -1,5 +1,9 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.views.generic import View
+from json import dumps
+
+from core.models.users import CTFUser
 
 
 class MainView(View):

@@ -13,14 +13,17 @@ import Divider from '@material-ui/core/Divider'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    margin: theme.spacing(),
-    marginTop: theme.spacing(3)
+    margin: theme.spacing(3)
   },
   valueChip: {
-    position: 'absolute',
+    position: "absolute",
     marginLeft: -theme.spacing(1.5),
     marginTop: -theme.spacing(1.5)
-  }
+    
+  },
+  alignLeft: {
+    textAlign: "left"
+  },
 }));
 
 export default function ChallengeCard(props) {
@@ -28,23 +31,20 @@ export default function ChallengeCard(props) {
 
   return (
     <Card className={classes.root}>
-    <div style={{textAlign: 'left'}}>
-    <Chip 
+      <div className={classes.alignLeft}>
+        <Chip 
           className={classes.valueChip} 
           size="small" 
-          variant="outlined" 
           label={props.points ? props.points:" --- "}
           color="primary"
           avatar={<Avatar><AddIcon /></Avatar>}
         />
-        </div>
+      </div>
       <CardContent>
-        
-        <Typography variant="h6">{props.title}</Typography>
+        <Typography variant="h5">{props.title}</Typography>
         <Divider />
         <Typography variant="body2">{props.slug}</Typography>
       </CardContent>
     </Card>
-    
   )
 }
