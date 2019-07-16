@@ -9,6 +9,8 @@ import Divider from '@material-ui/core/Divider'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
+import Zoom from '@material-ui/core/Zoom'
+
 import '../styles/Login.css'
 
 class LoginGizmo extends Component {
@@ -38,7 +40,7 @@ class LoginGizmo extends Component {
             method: 'POST',
             mode: 'cors',
             body: new FormData(event.target),
-        }).then(function (response) {
+        }).then(response => {
             let status = response.status
             response = response.json()
 
@@ -50,54 +52,56 @@ class LoginGizmo extends Component {
 
     render() {
         return (
-            <Container maxWidth="sm" className="LoginWidget">
-                <Paper>
-                    <div className="LoginBanner">
-                        <Typography variant="h5">Authentication Required</Typography>
-                    </div>
-                    <Divider variant="middle" />
+            <Zoom in={true}>
+                <Container maxWidth="sm" className="LoginWidget">
+                    <Paper>
+                        <div className="LoginBanner">
+                            <Typography variant="h5">Authentication Required</Typography>
+                        </div>
+                        <Divider variant="middle" />
 
-                    <form onSubmit={this.handleSubmit} className="LoginForm">
+                        <form onSubmit={this.handleSubmit} className="LoginForm">
 
-                        <TextField
-                            className="inputField"
-                            id="outlined-email-input"
-                            name="userName"
-                            label="Username / eMail"
-                            type="text"
-                            autoComplete="email"
-                            margin="normal"
-                            variant="outlined"
-                            value={this.state.userName}
-                            onChange={this.handleChange}
-                        />
-                        <br />
-                        <TextField
-                            className="inputField"
-                            id="outlined-password-input"
-                            label="Password"
-                            type="password"
-                            name="password"
-                            autoComplete="current-password"
-                            margin="normal"
-                            variant="outlined"
-                            value={this.state.password}
-                            onChange={this.handleChange}
-                        />
-                        <br />
-                        {this.state.message && <Typography variant="caption" color="error">{this.state.message}</Typography>}
-                        <br />
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            disabled={!this.validateForm()}
-                            type="submit"
-                        >
-                            Login
+                            <TextField
+                                className="inputField"
+                                id="outlined-email-input"
+                                name="userName"
+                                label="Username / eMail"
+                                type="text"
+                                autoComplete="email"
+                                margin="normal"
+                                variant="outlined"
+                                value={this.state.userName}
+                                onChange={this.handleChange}
+                            />
+                            <br />
+                            <TextField
+                                className="inputField"
+                                id="outlined-password-input"
+                                label="Password"
+                                type="password"
+                                name="password"
+                                autoComplete="current-password"
+                                margin="normal"
+                                variant="outlined"
+                                value={this.state.password}
+                                onChange={this.handleChange}
+                            />
+                            <br />
+                            {this.state.message && <Typography variant="caption" color="error">{this.state.message}</Typography>}
+                            <br />
+                            <Button
+                                color="primary"
+                                variant="contained"
+                                disabled={!this.validateForm()}
+                                type="submit"
+                            >
+                                Login
                         </Button>
-                    </form>
-                </Paper>
-            </Container>
+                        </form>
+                    </Paper>
+                </Container>
+            </Zoom>
         )
     }
 }
