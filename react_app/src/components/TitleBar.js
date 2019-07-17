@@ -19,6 +19,28 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function doLogOut(){
+  fetch("/logout", {
+    method: 'POST',
+    credentials: 'include'
+  })
+}
+
+function profileButton(authenticated){
+  if(!authenticated){
+    return(
+      <Button color="inherit">
+        Register
+      </Button>
+    )}  
+    else{
+      return(
+        <Button color="inherit" onClick={doLogOut}>
+          Logout
+        </Button>
+      )}
+}
+
 export default function TitleBar(props) {
   const classes = useStyles();
 
@@ -32,7 +54,7 @@ export default function TitleBar(props) {
           <Typography variant="h6" className={classes.title}>
             {props.title}
           </Typography>
-          {!props.authenticated && <Button color="inherit">Register</Button>}
+          {profileButton(props.authenticated)}
         </Toolbar>
       </AppBar>
     </div>
