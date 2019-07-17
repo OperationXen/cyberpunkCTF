@@ -45,8 +45,12 @@ class AuthLoginView(View):
         return JsonResponse(dict, status=401)
 
 
-class LogOutView(View):
+class AuthLogOutView(View):
     """ Logs out the current user, invalidating their session """
     def post(self, request):
         logout(request)
         return JsonResponse({"message": "Logged out"})
+
+    def get(self, request):
+        logout(request)
+        return HttpResponse("Logged out")

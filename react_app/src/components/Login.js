@@ -41,13 +41,15 @@ class LoginGizmo extends Component {
             credentials: 'include',
             body: new FormData(event.target),
         }).then(response => {
-            let status = response.status
-            response = response.json()
-
-            if (status != 200) {
-                this.setState({ password: "", message: response.message })
-            }
-        });
+            if(response.status == 200) {
+                alert("logged in")
+            }else{ 
+                response.json().then(response => {
+                    this.setState({ password: "", message: response.message })
+                })
+            } 
+            
+        })        
     }
 
     render() {
