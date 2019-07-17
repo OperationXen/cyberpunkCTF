@@ -3,6 +3,8 @@ import logo from '../logo.svg'
 import ReactDOM from 'react-dom'
 import Button from '@material-ui/core/Button'
 
+import Zoom from '@material-ui/core/Zoom'
+
 import '../styles/App.css'
 import TitleBar from './TitleBar'
 import LoginGizmo from './Login'
@@ -19,9 +21,8 @@ class App extends Component {
   }
   
   componentDidMount() {
-    fetch('http://127.0.0.1:8000/authcheck', {
+    fetch('/authcheck', {
       credentials: 'include',
-      mode: 'cors',
     }).then(result => result.json()).then((result) => {
       this.setState({
         isAuthenticated: result.isAuthenticated ? true:false,

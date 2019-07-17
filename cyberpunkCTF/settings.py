@@ -25,7 +25,7 @@ SECRET_KEY = '<script>confirm("Auto-destruct initiated");</script>'          # H
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = 'core.CTFUser'
 
 # Application definition
@@ -40,14 +40,12 @@ INSTALLED_APPS = [
 
     # libraries and addons
     'graphene_django',
-    'corsheaders',
 
     # apps in this project
     'core',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -108,12 +106,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-# CORS settings
-CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',                        # Development NODE.js server
-)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

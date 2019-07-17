@@ -36,9 +36,9 @@ class LoginGizmo extends Component {
     handleSubmit(event) {
         event.preventDefault()
 
-        fetch('http://127.0.0.1:8000/login', {
+        fetch('/login', {
             method: 'POST',
-            mode: 'cors',
+            credentials: 'include',
             body: new FormData(event.target),
         }).then(response => {
             let status = response.status
