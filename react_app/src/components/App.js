@@ -18,6 +18,7 @@ class App extends Component {
       userName: "",
       isAdmin: false
     };
+    this.userAuthDone = this.userAuthDone.bind(this);
   }
 
   componentDidMount() {
@@ -34,13 +35,17 @@ class App extends Component {
       });
   }
 
+  userAuthDone(newState) {
+    this.setState(newState);
+  }
+
   render() {
     let content;
 
     if (this.state.isAuthenticated) {
       content = <GameContainer />;
     } else {
-      content = <LoginGizmo />;
+      content = <LoginGizmo authChange={this.userAuthDone} />;
     }
 
     return (

@@ -41,7 +41,14 @@ class LoginGizmo extends Component {
       body: new FormData(event.target)
     }).then(response => {
       if (response.status == 200) {
-        alert("logged in");
+        response.json().then(response => {
+          this.props.authChange({
+            "isAuthenticated": true,
+            "userName": response.userName,
+            "isAdmin": response.isAdmin
+          })
+        })
+        
       } else {
         response.json().then(response => {
           this.setState({ password: "", message: response.message });
