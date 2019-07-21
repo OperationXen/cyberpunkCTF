@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import View
 from core.models.users import CTFUser
+from core.forms import SignUpForm
 
 
 #class PrivateGraphQLView(LoginRequiredMixin, GraphQLView):
@@ -54,3 +55,17 @@ class AuthLogOutView(View):
     def get(self, request):
         logout(request)
         return HttpResponse("Logged out")
+
+
+class AuthSignUpView(View):
+    def post(self, request):
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            login(request, user)
+            return JsonResponse({"message":"Account " + username + " successfully created"})
+
+        else:
+            return JsonResponse(form.errors, status=400)
+

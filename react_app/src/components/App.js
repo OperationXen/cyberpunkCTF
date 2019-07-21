@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import logo from "../logo.svg";
-import ReactDOM from "react-dom";
-import Button from "@material-ui/core/Button";
 
-import Zoom from "@material-ui/core/Zoom";
+import AppContext from "../AppContext";
 
 import "../styles/App.css";
 import TitleBar from "./TitleBar";
 import LoginGizmo from "./Login";
+import SignUpGizmo from "./SignUp";
 import GameContainer from "./GameContainer";
 
 class App extends Component {
@@ -45,14 +43,16 @@ class App extends Component {
     if (this.state.isAuthenticated) {
       content = <GameContainer />;
     } else {
-      content = <LoginGizmo authChange={this.userAuthDone} />;
+      content = <SignUpGizmo />;
+      //content = <LoginGizmo authChange={this.userAuthDone} />;
     }
 
     return (
       <div className="App">
-        <TitleBar title={"pew"} authenticated={this.state.isAuthenticated} />
-
-        {content}
+        <AppContext.Provider value={this.state}>
+          <TitleBar title={"pew"} authenticated={this.state.isAuthenticated} />
+          {content}
+        </AppContext.Provider>
       </div>
     );
   }
