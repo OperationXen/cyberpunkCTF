@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 
-import AppContext from "../AppContext";
-
 import "../styles/App.css";
 import TitleBar from "./TitleBar";
 import LoginGizmo from "./Login";
 import SignUpGizmo from "./SignUp";
 import GameContainer from "./GameContainer";
+
+/* create context with a default value */
+export const AppContext = React.createContext();
 
 class App extends Component {
   constructor(props) {
@@ -14,12 +15,16 @@ class App extends Component {
     this.state = {
       isAuthenticated: false,
       userName: "",
-      isAdmin: false
+      isAdmin: false,
+
+      newUser: false,
+
+      update: () => {alert("pewpew")}
     };
     this.userAuthDone = this.userAuthDone.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     fetch("/authcheck", {
       credentials: "include"
     })
@@ -43,14 +48,17 @@ class App extends Component {
     if (this.state.isAuthenticated) {
       content = <GameContainer />;
     } else {
-      content = <SignUpGizmo />;
-      //content = <LoginGizmo authChange={this.userAuthDone} />;
+      if (this.state.newUser) {
+        content = <SignUpGizmo />;
+      } else {
+        content = <LoginGizmo authChange={this.userAuthDone} />;
+      }
     }
 
     return (
       <div className="App">
         <AppContext.Provider value={this.state}>
-          <TitleBar title={"pew"} authenticated={this.state.isAuthenticated} />
+          <TitleBar title={"pew"} />
           {content}
         </AppContext.Provider>
       </div>
