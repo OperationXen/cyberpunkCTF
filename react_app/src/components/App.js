@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import logo from "../logo.svg";
-import ReactDOM from "react-dom";
-import Button from "@material-ui/core/Button";
-
-import Zoom from "@material-ui/core/Zoom";
 
 import "../styles/App.css";
 import TitleBar from "./TitleBar";
 import LoginGizmo from "./Login";
+import SignUpGizmo from "./SignUp";
 import GameContainer from "./GameContainer";
+
+import AppContext from '../AppContext'
 
 class App extends Component {
   constructor(props) {
@@ -16,12 +14,16 @@ class App extends Component {
     this.state = {
       isAuthenticated: false,
       userName: "",
-      isAdmin: false
+      isAdmin: false,
+
+      newUser: false,
+
+      update: (data) => {this.setState(data)}
     };
     this.userAuthDone = this.userAuthDone.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     fetch("/authcheck", {
       credentials: "include"
     })
@@ -45,14 +47,19 @@ class App extends Component {
     if (this.state.isAuthenticated) {
       content = <GameContainer />;
     } else {
-      content = <LoginGizmo authChange={this.userAuthDone} />;
+      if (this.state.newUser) {
+        content = <SignUpGizmo />;
+      } else {
+        content = <LoginGizmo authChange={this.userAuthDone} />;
+      }
     }
 
     return (
       <div className="App">
-        <TitleBar title={"pew"} authenticated={this.state.isAuthenticated} />
-
-        {content}
+        <AppContext.Provider value={this.state}>
+          <TitleBar title={"pew"} />
+          {content}
+        </AppContext.Provider>
       </div>
     );
   }

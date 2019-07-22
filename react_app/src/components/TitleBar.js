@@ -3,9 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+
+import ProfileButton from './ProfileButton'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,25 +19,6 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   }
 }));
-
-function doLogOut() {
-  fetch("/logout", {
-    method: "POST",
-    credentials: "include"
-  });
-}
-
-function profileButton(authenticated) {
-  if (!authenticated) {
-    return <Button color="inherit">Register</Button>;
-  } else {
-    return (
-      <Button color="inherit" onClick={doLogOut}>
-        Logout
-      </Button>
-    );
-  }
-}
 
 export default function TitleBar(props) {
   const classes = useStyles();
@@ -56,7 +38,9 @@ export default function TitleBar(props) {
           <Typography variant="h6" className={classes.title}>
             {props.title}
           </Typography>
-          {profileButton(props.authenticated)}
+
+          <ProfileButton></ProfileButton>
+
         </Toolbar>
       </AppBar>
     </div>

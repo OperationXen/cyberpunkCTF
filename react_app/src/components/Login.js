@@ -60,7 +60,7 @@ class LoginGizmo extends Component {
   render() {
     return (
       <Zoom in={true}>
-        <Container maxWidth="sm" className="LoginWidget">
+        <Container maxWidth="sm" className="LoginGizmo">
           <Paper>
             <div className="LoginBanner">
               <Typography variant="h5">Authentication Required</Typography>

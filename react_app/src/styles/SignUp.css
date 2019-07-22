@@ -1,14 +1,14 @@
-.LoginGizmo
+.SignUpGizmo
 {
-    margin-top: 20vh;
+    margin-top: 12vh;
 }
 
-.LoginBanner
+.SignUpBanner
 {
     padding: 1em;
 }
 
-.LoginForm
+.SignUpForm
 {
     padding-top: 2vh;
     padding-bottom: 2vh;
