@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import AppContext from "./App";
+import AppContext from "../AppContext";
 
 import Button from "@material-ui/core/Button";
 
@@ -9,7 +9,6 @@ class ProfileButton extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(this.context)
 
     this.existingUser = this.existingUser.bind(this);
     this.newUser = this.newUser.bind(this)
@@ -18,14 +17,12 @@ class ProfileButton extends React.Component {
 
   /* When existing user wants to log in not register */
   existingUser() {
-      console.log(this.context.userName)
-      //this.context.update({newUser: false})
+    this.context.update({newUser: false})
   }
 
   /* New user wishes to sign up */
   newUser() {
-    console.log(this.context.userName)
-    //this.context.update({newUser: true})
+    this.context.update({newUser: true})
   }
 
   doLogOut() {
@@ -33,10 +30,10 @@ class ProfileButton extends React.Component {
       method: "POST",
       credentials: "include"
     });
+    this.context.update({isAuthenticated:false, userName: "", isAdmin: false})
   }
 
   render() {
-    console.log(this.context);
     if (!this.context.isAuthenticated) {
       if (this.context.newUser) {
         return <Button color="inherit" onClick={this.existingUser}>Log In</Button>;

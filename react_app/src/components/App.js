@@ -6,8 +6,7 @@ import LoginGizmo from "./Login";
 import SignUpGizmo from "./SignUp";
 import GameContainer from "./GameContainer";
 
-/* create context with a default value */
-export const AppContext = React.createContext();
+import AppContext from '../AppContext'
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +18,7 @@ class App extends Component {
 
       newUser: false,
 
-      update: () => {alert("pewpew")}
+      update: (data) => {this.setState(data)}
     };
     this.userAuthDone = this.userAuthDone.bind(this);
   }

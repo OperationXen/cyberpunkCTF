@@ -7,7 +7,6 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
 import ProfileButton from './ProfileButton'
-import { defaultProps } from "recompose";
 
 const useStyles = makeStyles(theme => ({
   root: {
