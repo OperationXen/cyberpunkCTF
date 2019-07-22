@@ -13,6 +13,13 @@ const GET_ALL_CATEGORIES_QUERY = gql`
       id
       title
       order
+      challenges {
+        id
+        title
+        points
+        slug
+        solves
+      }
     }
   }
 `;

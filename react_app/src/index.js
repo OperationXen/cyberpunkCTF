@@ -10,6 +10,7 @@ import cyberpunkTheme from "./Theme";
 ReactDOM.render(
   <ApolloProvider client={apolloClient}>
     <MuiThemeProvider theme={cyberpunkTheme}>
+      
       <App />
     </MuiThemeProvider>
   </ApolloProvider>,
