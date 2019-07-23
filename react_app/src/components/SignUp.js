@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import AppContext from "../AppContext";
+
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
@@ -7,11 +9,13 @@ import Divider from "@material-ui/core/Divider";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-import "../styles/SignUp.css"
+import "../styles/SignUp.css";
 
 import Zoom from "@material-ui/core/Zoom";
 
 class SignUpGizmo extends Component {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -23,7 +27,7 @@ class SignUpGizmo extends Component {
 
       usernameFeedback: "",
       emailFeedback: "",
-      passwordFeedback: "",
+      passwordFeedback: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleUserNameChange = this.handleUserNameChange.bind(this);
@@ -33,8 +37,8 @@ class SignUpGizmo extends Component {
   }
 
   validateForm(event) {
-    if(this.state.password1 == "" || this.state.password2 == ""){
-      return(false)
+    if (this.state.password1 == "" || this.state.password2 == "") {
+      return false;
     }
     return true;
   }
@@ -43,33 +47,33 @@ class SignUpGizmo extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleUserNameChange(event){
-    this.setState({ 
+  handleUserNameChange(event) {
+    this.setState({
       [event.target.name]: event.target.value,
       usernameFeedback: ""
-     });
+    });
   }
 
-  handleeMailChange(event){
-    this.setState({ 
+  handleeMailChange(event) {
+    this.setState({
       [event.target.name]: event.target.value,
       emailFeedback: ""
-     });
+    });
   }
 
   handlePasswordChange(event) {
-    this.setState({ 
+    this.setState({
       [event.target.name]: event.target.value,
       passwordFeedback: ""
-     });
+    });
   }
 
   handleSubmit(event) {
     event.preventDefault();
 
-    if(this.state.password1 != this.state.password2){
-      this.setState({"message": "Passwords do not match..."})
-      return false
+    if (this.state.password1 != this.state.password2) {
+      this.setState({ message: "Passwords do not match..." });
+      return false;
     }
 
     fetch("/signup", {
@@ -78,29 +82,31 @@ class SignUpGizmo extends Component {
       body: new FormData(event.target)
     }).then(response => {
       if (response.status == 200) {
-        alert("logged in");
+        response.json().then(response => {
+          this.context.update(response);
+        });
       } else {
         response.json().then(response => {
-          if(response.username){
-            let usernameErrors = ""
+          if (response.username) {
+            let usernameErrors = "";
             for (var key in response.username) {
-              usernameErrors += response.username[key] + " \n"
+              usernameErrors += response.username[key] + " \n";
             }
-            this.setState( { usernameFeedback: usernameErrors })
+            this.setState({ usernameFeedback: usernameErrors });
           }
 
-          if(response.email){
-            let emailErrors = ""
+          if (response.email) {
+            let emailErrors = "";
             for (var key in response.email) {
-              emailErrors += response.email[key] + " \n"
+              emailErrors += response.email[key] + " \n";
             }
-            this.setState( { emailFeedback: emailErrors })
+            this.setState({ emailFeedback: emailErrors });
           }
 
-          if(response.password2){
-            let passwordErrors = ""
+          if (response.password2) {
+            let passwordErrors = "";
             for (var key in response.password2) {
-              passwordErrors += response.password2[key] + " \n"
+              passwordErrors += response.password2[key] + " \n";
             }
             this.setState({ passwordFeedback: passwordErrors });
           }

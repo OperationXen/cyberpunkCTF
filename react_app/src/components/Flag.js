@@ -3,15 +3,16 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { Input } from "@material-ui/core";
 import { TextField } from "material-ui";
+import Button from "@material-ui/core/Button";
 
 class FlagWidget extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-        flagtext: "",
-        message: ""
-    }
+      flagtext: "",
+      message: ""
+    };
 
     this.submitFlag = this.submitFlag.bind(this);
     this.submitAvailable = this.submitAvailable.bind(this);
@@ -25,9 +26,7 @@ class FlagWidget extends React.Component {
     // insert graphql mutation call here
   }
 
-  submitAvailable() {
-
-  }
+  submitAvailable() {}
 
   render() {
     return (
@@ -40,8 +39,8 @@ class FlagWidget extends React.Component {
           type="text"
           label="Flag"
           disabled={!this.submitAvailable}
-          helperText={this.props.nudge ? this.props.nudge : "Flag"}
-          onChange = {this.handleChange}
+          helperText={this.props.guide ? this.props.guide : "Flag"}
+          onChange={this.handleChange}
         />
         <Button
           id="flag-submit"
@@ -54,3 +53,5 @@ class FlagWidget extends React.Component {
     );
   }
 }
+
+export default FlagWidget;
