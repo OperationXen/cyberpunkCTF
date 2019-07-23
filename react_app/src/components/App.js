@@ -6,7 +6,7 @@ import LoginGizmo from "./Login";
 import SignUpGizmo from "./SignUp";
 import GameContainer from "./GameContainer";
 
-import AppContext from "../AppContext";
+import AppContext from "../Context";
 
 class App extends Component {
   constructor(props) {

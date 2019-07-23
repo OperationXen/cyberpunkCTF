@@ -1,6 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { GameContext } from "../Context";
+
 import Grid from "@material-ui/core/grid";
 import CTFCategory from "./CTFCategory";
 
@@ -32,37 +34,37 @@ const GET_CHALLENGE_DETAIL = gql`
       title
       slug
       image
-       
+
       content
       solves
       points
-       
-      flags{
+
+      flags {
         id
         title
         guide
         attempts
       }
 
-      hints{
+      hints {
         id
         title
         upfrontCost
         deferredCost
-         
+
         image
         file
         content
-        prerequisites{
+        prerequisites {
           id
           title
         }
       }
-      category{
+      category {
         id
         title
       }
-      prerequisites{
+      prerequisites {
         id
         title
       }
@@ -84,45 +86,67 @@ class GameContainer extends React.Component {
     this.state = {
       challengeDetail: null
     };
+    this.openDetail = this.openDetail.bind(this);
+    this.closeDetail = this.closeDetail.bind(this);
+  }
+
+  openDetail(id) {
+    this.setState({ challengeDetail: id });
+  }
+  closeDetail() {
+    this.setState({ challengeDetail: null });
   }
 
   render() {
     return (
-      <div className={styles.root}>
-        <Grid
-          container
-          spacing={3}
-          direction="row"
-          justify="space-around"
-          alignItems="center"
-        >
-          <Query query={GET_ALL_CATEGORIES_QUERY} pollInterval={60000}>
-            {({ loading, error, data }) => {
-              if (loading) return <div>Fetching</div>;
-              if (error) return <div>Error</div>;
-
-              return data.allCategories.map(category => (
-                <Grid item lg={6}>
-                  <CTFCategory key={category.id} category={category} />
-                </Grid>
-              ));
-            }}
-          </Query>
-        </Grid>
-        {/*this.state.challengeDetail != null */ true && (
-          <Query
-            query={GET_CHALLENGE_DETAIL}
-            variables={{ id: 1 }}
+      <GameContext.Provider
+        value={{ open: this.openDetail, close: this.closeDetail }}
+      >
+        <div className={styles.root}>
+          <Grid
+            container
+            spacing={3}
+            direction="row"
+            justify="space-around"
+            alignItems="center"
           >
-            {({ loading, error, data }) => {
-              if (loading) return <div>"..."</div>;
-              if (error) return <div>"Error"</div>;
+            <Query query={GET_ALL_CATEGORIES_QUERY} pollInterval={60000}>
+              {({ loading, error, data }) => {
+                if (loading) return <div>Fetching</div>;
+                if (error) return <div>Error</div>;
 
-              return <ChallengeWidget details={data} />;
-            }}
-          </Query>
-        )}
-      </div>
+                return data.allCategories.map(category => (
+                  <Grid item lg={6}>
+                    <CTFCategory
+                      key={category.id}
+                      category={category}
+                      detailView={this.openDetail}
+                    />
+                  </Grid>
+                ));
+              }}
+            </Query>
+          </Grid>
+          {this.state.challengeDetail != null && (
+            <Query
+              query={GET_CHALLENGE_DETAIL}
+              variables={{ id: this.state.challengeDetail }}
+            >
+              {({ loading, error, data }) => {
+                if (loading) return <div>"..."</div>;
+                if (error) return <div>"Error"</div>;
+
+                console.log(data);
+                return (
+                  <ChallengeWidget
+                    details={data.challenge}
+                  />
+                );
+              }}
+            </Query>
+          )}
+        </div>
+      </GameContext.Provider>
     );
   }
 }

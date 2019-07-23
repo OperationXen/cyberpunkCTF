@@ -1,8 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-import AddIcon from "@material-ui/icons/Add";
+import { GameContext } from "../Context";
 
+import AddIcon from "@material-ui/icons/Add";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -11,43 +12,47 @@ import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    margin: theme.spacing(3)
-  },
-  valueChip: {
-    position: "absolute",
-    marginLeft: -theme.spacing(1.5),
-    marginTop: -theme.spacing(1.5)
-  },
-  alignLeft: {
-    textAlign: "left"
+import "../styles/ChallengeCard.css";
+
+class ChallengeCard extends React.Component {
+  static contextType = GameContext;
+
+  constructor(props) {
+    super(props);
+
+    this.handleClick = this.handleClick.bind(this);
   }
-}));
 
-export default function ChallengeCard(props) {
-  const classes = useStyles();
+  handleClick() {
+    this.context.open(this.props.challenge.id);
+  }
 
-  return (
-    <Card className={classes.root}>
-      <div className={classes.alignLeft}>
-        <Chip
-          className={classes.valueChip}
-          size="small"
-          label={props.points ? props.points : " --- "}
-          color="primary"
-          avatar={
-            <Avatar>
-              <AddIcon />
-            </Avatar>
-          }
-        />
-      </div>
-      <CardContent>
-        <Typography variant="h5">{props.title}</Typography>
-        <Divider />
-        <Typography variant="body2">{props.slug}</Typography>
-      </CardContent>
-    </Card>
-  );
+  render() {
+    const challenge = this.props.challenge
+
+    return (
+      <Card className="challenge-card" onClick={this.handleClick}>
+        <div className="align-left">
+          <Chip
+            className="value-chip"
+            size="small"
+            label={challenge.points ? challenge.points : " --- "}
+            color="primary"
+            avatar={
+              <Avatar>
+                <AddIcon />
+              </Avatar>
+            }
+          />
+        </div>
+        <CardContent>
+          <Typography variant="h5">{challenge.title}</Typography>
+          <Divider />
+          <Typography variant="body2">{challenge.slug}</Typography>
+        </CardContent>
+      </Card>
+    );
+  }
 }
+
+export default ChallengeCard;

@@ -1,42 +1,58 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles } from "@material-ui/core/styles";
 
+import { GameContext } from "../Context";
+
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Divider from "@material-ui/core/Divider";
+import Dialog from "@material-ui/core/Dialog";
 import Grid from "@material-ui/core/Grid";
 
 import FlagWidget from "./Flag";
 
 const styles = makeStyles(theme => ({
   root: {
-    width: "50%",
+    width: "60%",
     height: "80%",
     padding: theme.spacing()
   }
 }));
 
 class ChallengeWidget extends React.Component {
+  static contextType = GameContext;
+
   constructor(props) {
     super(props);
+
+    this.state = {
+      open: true
+    };
+    this.handleClose = this.handleClose.bind(this)
+  }
+
+  handleClose() {
+    this.context.close()
   }
 
   render() {
-    return (
-      <Container className={styles.root}>
-        <Typography variant="h5">{this.props.title}</Typography>
-        <Divider variant="middle" />
-        <div className="challenge-text-area">{this.props.content}</div>
+    const challenge = this.props.details;
 
-        <Grid container direction="column" justify="center" alignItems="center">
-          {/*this.props.challenge.flags.map(flag => (
-            <Grid item>
-              <FlagWidget key={flag.id} flag={flag} />
-            </Grid>
-          ))*/}
-          <FlagWidget key={1} />
-        </Grid>
-      </Container>
+    return (
+      <div>
+        <Dialog onClose={this.handleClose} aria-labelledby="challenge-dialog" className={styles.root} open={true}>
+          <DialogTitle id="challenge-dialog-title" onClose={this.handleClose}>
+            {challenge.title}
+          </DialogTitle>
+          <DialogContent dividers>
+            <Typography gutterBottom id="challenge-dialog-content">
+              {challenge.content}
+            </Typography>
+          </DialogContent>
+          <DialogActions>Actions go here</DialogActions>
+        </Dialog>
+      </div>
     );
   }
 }

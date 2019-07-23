@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import AppContext from "../AppContext";
+import AppContext from "../Context";
 
 import Button from "@material-ui/core/Button";
 

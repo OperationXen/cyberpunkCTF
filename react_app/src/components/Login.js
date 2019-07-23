@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-import AppContext from "../AppContext";
+import AppContext from "../Context";
 
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
