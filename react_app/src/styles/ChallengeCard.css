@@ -1,0 +1,14 @@
+.challenge-card{
+    margin: 2em;
+}
+
+.value-chip{
+    position: absolute;
+    margin-left: -1em;
+    margin-top: -1em;
+}
+    
+.align-left {
+    text-align: left;
+}
+  

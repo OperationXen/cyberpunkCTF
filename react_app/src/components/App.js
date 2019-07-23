@@ -6,7 +6,7 @@ import LoginGizmo from "./Login";
 import SignUpGizmo from "./SignUp";
 import GameContainer from "./GameContainer";
 
-import AppContext from '../AppContext'
+import AppContext from "../Context";
 
 class App extends Component {
   constructor(props) {
@@ -18,9 +18,12 @@ class App extends Component {
 
       newUser: false,
 
-      update: (data) => {this.setState(data)}
+      update: data => {
+        this.setState(data);
+      }
     };
     this.userAuthDone = this.userAuthDone.bind(this);
+    this.componentWillMount = this.componentWillMount.bind(this)
   }
 
   componentWillMount() {
@@ -50,7 +53,7 @@ class App extends Component {
       if (this.state.newUser) {
         content = <SignUpGizmo />;
       } else {
-        content = <LoginGizmo authChange={this.userAuthDone} />;
+        content = <LoginGizmo />;
       }
     }
 

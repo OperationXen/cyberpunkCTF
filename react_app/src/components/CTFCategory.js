@@ -61,9 +61,7 @@ export default function CTFCategory(props) {
               <Grid item>
                 <ChallengeCard
                   key={challenge.id}
-                  title={challenge.title}
-                  points={challenge.points}
-                  slug={challenge.slug}
+                  challenge = {challenge}
                 />
               </Grid>
             ));

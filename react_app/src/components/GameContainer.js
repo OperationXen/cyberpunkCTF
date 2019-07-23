@@ -1,11 +1,15 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { GameContext } from "../Context";
+
 import Grid from "@material-ui/core/grid";
 import CTFCategory from "./CTFCategory";
 
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+
+import ChallengeWidget from "./ChallengeWidget";
 
 const GET_ALL_CATEGORIES_QUERY = gql`
   {
@@ -13,41 +17,138 @@ const GET_ALL_CATEGORIES_QUERY = gql`
       id
       title
       order
+      challenges {
+        id
+        title
+        points
+        slug
+        solves
+      }
     }
   }
 `;
 
-const useStyles = makeStyles(theme => ({
+const GET_CHALLENGE_DETAIL = gql`
+  query Challenge($id: Int) {
+    challenge(id: $id) {
+      title
+      slug
+      image
+
+      content
+      solves
+      points
+
+      flags {
+        id
+        title
+        guide
+        attempts
+      }
+
+      hints {
+        id
+        title
+        upfrontCost
+        deferredCost
+
+        image
+        file
+        content
+        prerequisites {
+          id
+          title
+        }
+      }
+      category {
+        id
+        title
+      }
+      prerequisites {
+        id
+        title
+      }
+      unlockDelay
+    }
+  }
+`;
+
+const styles = makeStyles(theme => ({
   root: {
     padding: theme.spacing()
   }
 }));
 
-export default function GameContainer(props) {
-  const classes = useStyles();
+class GameContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <div className={classes.root}>
-      <Grid
-        container
-        spacing={3}
-        direction="row"
-        justify="space-around"
-        alignItems="center"
+    this.state = {
+      challengeDetail: null
+    };
+    this.openDetail = this.openDetail.bind(this);
+    this.closeDetail = this.closeDetail.bind(this);
+  }
+
+  openDetail(id) {
+    this.setState({ challengeDetail: id });
+  }
+  closeDetail() {
+    this.setState({ challengeDetail: null });
+  }
+
+  render() {
+    return (
+      <GameContext.Provider
+        value={{ open: this.openDetail, close: this.closeDetail }}
       >
-        <Query query={GET_ALL_CATEGORIES_QUERY} pollInterval={60000}>
-          {({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>;
-            if (error) return <div>Error</div>;
+        <div className={styles.root}>
+          <Grid
+            container
+            spacing={3}
+            direction="row"
+            justify="space-around"
+            alignItems="center"
+          >
+            <Query query={GET_ALL_CATEGORIES_QUERY} pollInterval={60000}>
+              {({ loading, error, data }) => {
+                if (loading) return <div>Fetching</div>;
+                if (error) return <div>Error</div>;
 
-            return data.allCategories.map(category => (
-              <Grid item lg={6}>
-                <CTFCategory key={category.id} category={category} />
-              </Grid>
-            ));
-          }}
-        </Query>
-      </Grid>
-    </div>
-  );
+                return data.allCategories.map(category => (
+                  <Grid item lg={6}>
+                    <CTFCategory
+                      key={category.id}
+                      category={category}
+                      detailView={this.openDetail}
+                    />
+                  </Grid>
+                ));
+              }}
+            </Query>
+          </Grid>
+          {this.state.challengeDetail != null && (
+            <Query
+              query={GET_CHALLENGE_DETAIL}
+              variables={{ id: this.state.challengeDetail }}
+            >
+              {({ loading, error, data }) => {
+                if (loading) return <div>"..."</div>;
+                if (error) return <div>"Error"</div>;
+
+                console.log(data);
+                return (
+                  <ChallengeWidget
+                    details={data.challenge}
+                  />
+                );
+              }}
+            </Query>
+          )}
+        </div>
+      </GameContext.Provider>
+    );
+  }
 }
+
+export default GameContainer;

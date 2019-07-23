@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
+import AppContext from "../Context";
+
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
@@ -13,6 +15,8 @@ import Zoom from "@material-ui/core/Zoom";
 import "../styles/Login.css";
 
 class LoginGizmo extends Component {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -42,13 +46,12 @@ class LoginGizmo extends Component {
     }).then(response => {
       if (response.status == 200) {
         response.json().then(response => {
-          this.props.authChange({
-            "isAuthenticated": true,
-            "userName": response.userName,
-            "isAdmin": response.isAdmin
-          })
-        })
-        
+          this.context.update({
+            isAuthenticated: true,
+            userName: response.userName,
+            isAdmin: response.isAdmin
+          });
+        });
       } else {
         response.json().then(response => {
           this.setState({ password: "", message: response.message });
