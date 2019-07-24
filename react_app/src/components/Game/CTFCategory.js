@@ -1,15 +1,14 @@
 import React, { Component } from "react";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
 
-import ChallengeCard from "./ChallengeCard";
-
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
+import ChallengeCard from "components/Game/ChallengeCard";
 
 const GET_ALL_CHALLENGES_QUERY = gql`
   query Challenges($cat: String) {
@@ -59,12 +58,7 @@ export default function CTFCategory(props) {
 
             return data.allChallenges.map(challenge => (
               <Grid item>
-                <ChallengeCard
-                  key={challenge.id}
-                  title={challenge.title}
-                  points={challenge.points}
-                  slug={challenge.slug}
-                />
+                <ChallengeCard key={challenge.id} challenge={challenge} />
               </Grid>
             ));
           }}

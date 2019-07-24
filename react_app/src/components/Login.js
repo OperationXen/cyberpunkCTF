@@ -1,18 +1,20 @@
 import React, { Component } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
+import AppContext from "Context";
+
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
+import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
+import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
-
+import Paper from "@material-ui/core/Paper";
 import Zoom from "@material-ui/core/Zoom";
 
-import "../styles/Login.css";
+import "styles/Login.css";
 
 class LoginGizmo extends Component {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -42,13 +44,12 @@ class LoginGizmo extends Component {
     }).then(response => {
       if (response.status == 200) {
         response.json().then(response => {
-          this.props.authChange({
-            "isAuthenticated": true,
-            "userName": response.userName,
-            "isAdmin": response.isAdmin
-          })
-        })
-        
+          this.context.update({
+            isAuthenticated: true,
+            userName: response.userName,
+            isAdmin: response.isAdmin
+          });
+        });
       } else {
         response.json().then(response => {
           this.setState({ password: "", message: response.message });
@@ -60,16 +61,17 @@ class LoginGizmo extends Component {
   render() {
     return (
       <Zoom in={true}>
-        <Container maxWidth="sm" className="LoginGizmo">
-          <Paper>
-            <div className="LoginBanner">
+        <Container maxWidth="sm">
+          <Paper className="login-gizmo">
+            <div className="login-banner">
               <Typography variant="h5">Authentication Required</Typography>
             </div>
             <Divider variant="middle" />
 
             <form onSubmit={this.handleSubmit} className="LoginForm">
               <TextField
-                className="inputField"
+                autoFocus
+                className="input-field"
                 id="outlined-username-input"
                 name="userName"
                 label="Username / eMail"
@@ -82,7 +84,7 @@ class LoginGizmo extends Component {
               />
               <br />
               <TextField
-                className="inputField"
+                className="input-field"
                 id="outlined-password-input"
                 label="Password"
                 type="password"

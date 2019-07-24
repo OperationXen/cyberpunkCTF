@@ -7,6 +7,7 @@ class BaseFlagType(DjangoObjectType):
     """ GraphQL representation of the BaseFlag model """
     class Meta:
         model = BaseFlag
+        exclude_fields = ("value", "exact", "regex")
 
 
 class FlagQuery(graphene.ObjectType):
