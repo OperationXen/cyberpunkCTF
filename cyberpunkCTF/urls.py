@@ -13,7 +13,7 @@ urlpatterns = [
     re_path("login/?", csrf_exempt(AuthLoginView.as_view())),
     re_path("logout/?", csrf_exempt(AuthLogOutView.as_view())),
     re_path("signup/?", csrf_exempt(AuthSignUpView.as_view())),
-
     re_path('admin/?', admin.site.urls),
+
     path('', include('web_ui.urls')),
 ]
