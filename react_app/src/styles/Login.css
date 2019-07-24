@@ -1,20 +1,21 @@
-.LoginGizmo
+.login-gizmo
 {
     margin-top: 20vh;
+    padding-bottom: 1em;
 }
 
-.LoginBanner
+.login-banner
 {
     padding: 1em;
 }
 
-.LoginForm
+.login-form
 {
     padding-top: 2vh;
     padding-bottom: 2vh;
 }
 
-.inputField
+.input-field
 {
     width: 80%;
 }

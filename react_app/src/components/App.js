@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 
-import "../styles/App.css";
-import TitleBar from "./TitleBar";
-import LoginGizmo from "./Login";
-import SignUpGizmo from "./SignUp";
-import GameContainer from "./GameContainer";
+import AppContext from "Context";
 
-import AppContext from "../Context";
+import GameContainer from "components/Game/GameContainer";
+import SignUpGizmo from "components/SignUp";
+import TitleBar from "components/TitleBar";
+import LoginGizmo from "components/Login";
+
+import "styles/App.css";
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class App extends Component {
       }
     };
     this.userAuthDone = this.userAuthDone.bind(this);
-    this.componentWillMount = this.componentWillMount.bind(this)
+    this.componentWillMount = this.componentWillMount.bind(this);
   }
 
   componentWillMount() {

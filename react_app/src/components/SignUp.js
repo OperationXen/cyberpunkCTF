@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 
-import AppContext from "../Context";
+import AppContext from "Context";
 
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import TextField from "@material-ui/core/TextField";
+import Container from "@material-ui/core/Container";
+import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
-
-import "../styles/SignUp.css";
-
+import Paper from "@material-ui/core/Paper";
 import Zoom from "@material-ui/core/Zoom";
+
+import "styles/SignUp.css";
 
 class SignUpGizmo extends Component {
   static contextType = AppContext;
@@ -118,17 +117,17 @@ class SignUpGizmo extends Component {
   render() {
     return (
       <Zoom in={true}>
-        <Container maxWidth="sm" className="SignUpGizmo">
+        <Container maxWidth="sm" className="signup-gizmo">
           <Paper>
-            <div className="SignUpBanner">
+            <div className="signup-banner">
               <Typography variant="h5">Register Account</Typography>
             </div>
             <Divider variant="middle" />
 
-            <form onSubmit={this.handleSubmit} className="SignUpForm">
+            <form onSubmit={this.handleSubmit} className="signup-form">
               <TextField
                 required
-                className="inputField"
+                className="input-field"
                 id="outlined-username-input"
                 name="username"
                 label="Username (Public)"
@@ -146,7 +145,7 @@ class SignUpGizmo extends Component {
                 </Typography>
               )}
               <TextField
-                className="inputField"
+                className="input-field"
                 id="outlined-email-input"
                 name="email"
                 label="eMail Address"
@@ -166,7 +165,7 @@ class SignUpGizmo extends Component {
               <br />
               <Divider variant="middle" />
               <TextField
-                className="inputField"
+                className="input-field"
                 id="outlined-password1-input"
                 label="Password"
                 type="password"
@@ -178,7 +177,7 @@ class SignUpGizmo extends Component {
               />
               <br />
               <TextField
-                className="inputField"
+                className="input-field"
                 id="outlined-password2-input"
                 label="Password (Confirm)"
                 type="password"

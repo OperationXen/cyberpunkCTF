@@ -1,5 +1,11 @@
 .challenge-card{
-    margin: 2em;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    width: 15em;
+    height: 15em;
+
 }
 
 .value-chip{

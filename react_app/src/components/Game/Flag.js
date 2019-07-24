@@ -1,9 +1,10 @@
 import React from "react";
 
 import Typography from "@material-ui/core/Typography";
-import { Input } from "@material-ui/core";
-import { TextField } from "material-ui";
 import Button from "@material-ui/core/Button";
+import { TextField } from "material-ui";
+
+import "styles/FlagWidget.css"
 
 class FlagWidget extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class FlagWidget extends React.Component {
         <TextField
           id="outlined-flag-input"
           name="flagInput"
-          className="flagInput"
+          className="flag-input"
           variant="outlined"
           type="text"
           label="Flag"

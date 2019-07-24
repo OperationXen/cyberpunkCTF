@@ -1,15 +1,15 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-
-import { GameContext } from "../Context";
-
-import Grid from "@material-ui/core/grid";
-import CTFCategory from "./CTFCategory";
-
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
-import ChallengeWidget from "./ChallengeWidget";
+import { GameContext } from "Context";
+
+import Grid from "@material-ui/core/grid";
+
+import ChallengeWidget from "components/Game/ChallengeWidget";
+import CTFCategory from "components/Game/CTFCategory";
+
+import 'styles/GameContainer.css'
 
 const GET_ALL_CATEGORIES_QUERY = gql`
   {
@@ -73,12 +73,6 @@ const GET_CHALLENGE_DETAIL = gql`
   }
 `;
 
-const styles = makeStyles(theme => ({
-  root: {
-    padding: theme.spacing()
-  }
-}));
-
 class GameContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -102,7 +96,7 @@ class GameContainer extends React.Component {
       <GameContext.Provider
         value={{ open: this.openDetail, close: this.closeDetail }}
       >
-        <div className={styles.root}>
+        <div className="game-container">
           <Grid
             container
             spacing={3}

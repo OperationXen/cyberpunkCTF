@@ -1,18 +1,17 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 
-import { GameContext } from "../Context";
+import { GameContext } from "Context";
 
-import AddIcon from "@material-ui/icons/Add";
-import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Chip from "@material-ui/core/Chip";
-import Avatar from "@material-ui/core/Avatar";
+import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import Avatar from "@material-ui/core/Avatar";
+import AddIcon from "@material-ui/icons/Add";
+import Chip from "@material-ui/core/Chip";
+import Card from "@material-ui/core/Card";
 
-import "../styles/ChallengeCard.css";
+import "styles/ChallengeCard.css";
 
 class ChallengeCard extends React.Component {
   static contextType = GameContext;
@@ -28,7 +27,7 @@ class ChallengeCard extends React.Component {
   }
 
   render() {
-    const challenge = this.props.challenge
+    const challenge = this.props.challenge;
 
     return (
       <Card className="challenge-card" onClick={this.handleClick}>

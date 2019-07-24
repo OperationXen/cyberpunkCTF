@@ -1,20 +1,20 @@
-.SignUpGizmo
+.signup-gizmo
 {
     margin-top: 12vh;
 }
 
-.SignUpBanner
+.signup-banner
 {
     padding: 1em;
 }
 
-.SignUpForm
+.signup-form
 {
     padding-top: 2vh;
     padding-bottom: 2vh;
 }
 
-.inputField
+.input-field
 {
     width: 80%;
 }

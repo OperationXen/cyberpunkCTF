@@ -1,7 +1,6 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 
-import { GameContext } from "../Context";
+import { GameContext } from "Context";
 
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -10,15 +9,9 @@ import Typography from "@material-ui/core/Typography";
 import Dialog from "@material-ui/core/Dialog";
 import Grid from "@material-ui/core/Grid";
 
-import FlagWidget from "./Flag";
+import FlagWidget from "components/Game/Flag";
 
-const styles = makeStyles(theme => ({
-  root: {
-    width: "60%",
-    height: "80%",
-    padding: theme.spacing()
-  }
-}));
+import "styles/ChallengeWidget.css"
 
 class ChallengeWidget extends React.Component {
   static contextType = GameContext;
@@ -29,11 +22,11 @@ class ChallengeWidget extends React.Component {
     this.state = {
       open: true
     };
-    this.handleClose = this.handleClose.bind(this)
+    this.handleClose = this.handleClose.bind(this);
   }
 
   handleClose() {
-    this.context.close()
+    this.context.close();
   }
 
   render() {
@@ -41,7 +34,12 @@ class ChallengeWidget extends React.Component {
 
     return (
       <div>
-        <Dialog onClose={this.handleClose} aria-labelledby="challenge-dialog" className={styles.root} open={true}>
+        <Dialog
+          onClose={this.handleClose}
+          aria-labelledby="challenge-dialog"
+          className="challenge-dialog"
+          open={true}
+        >
           <DialogTitle id="challenge-dialog-title" onClose={this.handleClose}>
             {challenge.title}
           </DialogTitle>
