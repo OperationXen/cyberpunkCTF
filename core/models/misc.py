@@ -7,6 +7,7 @@ class Category(models.Model):
     """ Thematic grouping of challenges under a single heading """
     title = CharField(max_length=256, blank=False, help_text="Name of category")
     order = IntegerField(null=True, blank=True, help_text="Ordering override")
+    background = CharField(max_length=16, blank=True, null=True, help_text="The background colour to use for this category")
 
     def __str__(self):
         return self.title

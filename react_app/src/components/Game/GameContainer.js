@@ -17,6 +17,7 @@ const GET_ALL_CATEGORIES_QUERY = gql`
       id
       title
       order
+      background
       challenges {
         id
         title
