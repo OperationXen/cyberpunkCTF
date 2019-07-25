@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
@@ -9,18 +7,6 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
 import ChallengeCard from "components/Game/ChallengeCard";
-
-const GET_ALL_CHALLENGES_QUERY = gql`
-  query Challenges($cat: String) {
-    allChallenges(category: $cat) {
-      id
-      title
-      points
-      slug
-      solves
-    }
-  }
-`;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,6 +19,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function CTFCategory(props) {
   const classes = useStyles();
+
+  if(props.category.challenges.length <= 0){
+    return null
+  }
 
   return (
     <Paper className={classes.root}>
@@ -47,22 +37,11 @@ export default function CTFCategory(props) {
         justify="space-around"
         alignItems="center"
       >
-        <Query
-          query={GET_ALL_CHALLENGES_QUERY}
-          variables={{ cat: props.category.title }}
-          pollInterval={45000}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return <div>Loading</div>;
-            if (error) return <div>Error</div>;
-
-            return data.allChallenges.map(challenge => (
-              <Grid item>
-                <ChallengeCard key={challenge.id} challenge={challenge} />
-              </Grid>
-            ));
-          }}
-        </Query>
+        {props.category.challenges.map(data => (
+          <Grid item>
+            <ChallengeCard key={data.id} challenge={data} />
+          </Grid>
+        ))}
       </Grid>
       {props.caption && props.caption.length() > 0 && (
         <div>

@@ -109,12 +109,11 @@ class GameContainer extends React.Component {
                 if (loading) return <div>Fetching</div>;
                 if (error) return <div>Error</div>;
 
-                return data.allCategories.map(category => (
-                  <Grid item lg={6}>
+                return data.allCategories.map(data => (
+                  <Grid item>
                     <CTFCategory
-                      key={category.id}
-                      category={category}
-                      detailView={this.openDetail}
+                      key={data.id}
+                      category={data}
                     />
                   </Grid>
                 ));
