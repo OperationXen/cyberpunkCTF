@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import AppContext from "Context";
 
 import GameContainer from "components/Game/GameContainer";
-import SignUpGizmo from "components/SignUp";
+import SignUpGizmo from "components/Auth/SignUp";
 import TitleBar from "components/TitleBar";
-import LoginGizmo from "components/Login";
+import LoginGizmo from "components/Auth/Login";
 
 import "styles/App.css";
 
