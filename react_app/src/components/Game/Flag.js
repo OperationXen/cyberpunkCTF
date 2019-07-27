@@ -2,9 +2,9 @@ import React from "react";
 
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { TextField } from "material-ui";
+import TextField from "@material-ui/core/TextField";
 
-import "styles/FlagWidget.css"
+import "styles/FlagWidget.css";
 
 class FlagWidget extends React.Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class FlagWidget extends React.Component {
 
     this.submitFlag = this.submitFlag.bind(this);
     this.submitAvailable = this.submitAvailable.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
@@ -30,25 +31,41 @@ class FlagWidget extends React.Component {
   submitAvailable() {}
 
   render() {
+    const flag = this.props.flag;
+
+    if (flag == undefined) {
+      return null;
+    }
+
     return (
-      <div>
-        <TextField
-          id="outlined-flag-input"
-          name="flagInput"
-          className="flag-input"
-          variant="outlined"
-          type="text"
-          label="Flag"
-          disabled={!this.submitAvailable}
-          helperText={this.props.guide ? this.props.guide : "Flag"}
-          onChange={this.handleChange}
-        />
-        <Button
-          id="flag-submit"
-          name="flagSubmit"
-          type="submit"
-          onSubmit={this.submitFlag}
-        />
+      <div className="flagwidget">
+        <div className="flagwidget-input">
+          <TextField
+            fullWidth
+            id="flag-input"
+            name="flagInput"
+            label="Flag"
+            placeholder={flag.guide ? flag.guide : "Flag"}
+            disabled={!this.submitAvailable}
+            onChange={this.handleChange}
+            variant="outlined"
+          />
+        </div>
+        <div className="flagwidget-button">
+          <Button
+            fullWidth
+            id="flag-submit"
+            name="flagSubmit"
+            type="submit"
+            color="primary"
+            variant="contained"
+            size="large"
+            style={{height: "3.5em"}}
+            onSubmit={this.submitFlag}
+          >
+            Submit
+          </Button>
+        </div>
         {this.state.message && <Typography>{this.state.message}</Typography>}
       </div>
     );
