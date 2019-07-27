@@ -9,6 +9,7 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Zoom from "@material-ui/core/Zoom";
+import Grow from "@material-ui/core/Grow";
 
 import "styles/Login.css";
 
@@ -41,21 +42,39 @@ class LoginGizmo extends Component {
       method: "POST",
       credentials: "include",
       body: new FormData(event.target)
-    }).then(response => {
-      if (response.status == 200) {
-        response.json().then(response => {
-          this.context.update({
-            isAuthenticated: true,
-            userName: response.userName,
-            isAdmin: response.isAdmin
+    })
+      .then(response => {
+        if (response.status == 200) {
+          response.json().then(response => {
+            this.context.update({
+              isAuthenticated: true,
+              userName: response.userName,
+              isAdmin: response.isAdmin
+            });
           });
-        });
-      } else {
-        response.json().then(response => {
-          this.setState({ password: "", message: response.message });
-        });
-      }
-    });
+        } else if (response.status == 500) {
+          this.setState({ message: "The server encountered an error" });
+        } else {
+          response.json().then(response => {
+            this.setState({ password: "", message: response.message });
+          });
+        }
+      })
+      .catch(error => {
+        this.setState({ message: "Unable to connect to server" });
+      });
+  }
+
+  messageContents() {
+    if (this.state.message) {
+      return (
+        <div>
+          <Typography variant="caption" color="error">
+            {this.state.message}
+          </Typography>
+        </div>
+      );
+    }
   }
 
   render() {
@@ -96,11 +115,7 @@ class LoginGizmo extends Component {
                 onChange={this.handleChange}
               />
               <br />
-              {this.state.message && (
-                <Typography variant="caption" color="error">
-                  {this.state.message}
-                </Typography>
-              )}
+              {this.messageContents()}
               <br />
               <Button
                 color="primary"
