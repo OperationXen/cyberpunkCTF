@@ -11,7 +11,7 @@ import Grid from "@material-ui/core/Grid";
 
 import FlagWidget from "components/Game/Flag";
 
-import "styles/ChallengeWidget.css"
+import "styles/ChallengeWidget.css";
 
 class ChallengeWidget extends React.Component {
   static contextType = GameContext;
@@ -22,6 +22,8 @@ class ChallengeWidget extends React.Component {
     this.state = {
       open: true
     };
+    // think i already mentioned this, but this implementation of a dialog
+    // is really confusing - there's much easier ways!
     this.handleClose = this.handleClose.bind(this);
   }
 
@@ -30,10 +32,12 @@ class ChallengeWidget extends React.Component {
   }
 
   render() {
+    // calling bits of state/props things like "details" *will 100% confuse future you*.
+    // speaking from expereience. Call it 'challenge' if that's what it is.
     const challenge = this.props.details;
 
     return (
-      <div className= "challenge-display">
+      <div className="challenge-display">
         <Dialog
           onClose={this.handleClose}
           aria-labelledby="challenge-dialog"
@@ -48,7 +52,7 @@ class ChallengeWidget extends React.Component {
               {challenge.content}
             </Typography>
           </DialogContent>
-          <FlagWidget flag={challenge.flags[0]}></FlagWidget>
+          <FlagWidget flag={challenge.flags[0]} />
           <DialogActions>Actions go here</DialogActions>
         </Dialog>
       </div>

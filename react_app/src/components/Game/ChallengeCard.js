@@ -22,12 +22,14 @@ class ChallengeCard extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  // Bad function name :(
   handleClick() {
     this.context.open(this.props.challenge.id);
   }
 
   render() {
-    const challenge = this.props.challenge;
+    // save those money-makers :)
+    const { challenge } = this.props;
 
     return (
       <Card className="challenge-card" onClick={this.handleClick}>
