@@ -1,15 +1,14 @@
-.login-gizmo
+.signup-gizmo
 {
-    margin-top: 20vh;
-    padding-bottom: 1em;
+    margin-top: 12vh;
 }
 
-.login-banner
+.signup-banner
 {
     padding: 1em;
 }
 
-.login-form
+.signup-form
 {
     padding-top: 2vh;
     padding-bottom: 2vh;

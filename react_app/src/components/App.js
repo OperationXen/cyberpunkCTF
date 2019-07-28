@@ -1,53 +1,69 @@
-import React, { Component } from 'react'
-import logo from '../logo.svg'
-import ReactDOM from 'react-dom'
-import Button from '@material-ui/core/Button'
+import React, { Component } from "react";
 
-import Zoom from '@material-ui/core/Zoom'
+import AppContext from "Context";
 
-import '../styles/App.css'
-import TitleBar from './TitleBar'
-import LoginGizmo from './Login'
-import GameContainer from './GameContainer'
+import GameContainer from "components/Game/GameContainer";
+import SignUpGizmo from "components/Auth/SignUp";
+import TitleBar from "components/TitleBar";
+import LoginGizmo from "components/Auth/Login";
+
+import "styles/App.css";
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       isAuthenticated: false,
       userName: "",
-      isAdmin: false
-    }
+      isAdmin: false,
+
+      newUser: false,
+
+      update: data => {
+        this.setState(data);
+      }
+    };
+    this.userAuthDone = this.userAuthDone.bind(this);
+    this.componentWillMount = this.componentWillMount.bind(this);
   }
-  
-  componentDidMount() {
-    fetch('/authcheck', {
-      credentials: 'include',
-    }).then(result => result.json()).then((result) => {
-      this.setState({
-        isAuthenticated: result.isAuthenticated ? true:false,
+
+  componentWillMount() {
+    fetch("/authcheck", {
+      credentials: "include"
+    })
+      .then(result => result.json())
+      .then(result => {
+        this.setState({
+          isAuthenticated: result.isAuthenticated ? true : false,
           userName: result.userName,
-          isAdmin: result.isAdmin ? true:false
-        })
-    });
+          isAdmin: result.isAdmin ? true : false
+        });
+      });
+  }
+
+  userAuthDone(newState) {
+    this.setState(newState);
   }
 
   render() {
     let content;
 
-    if(this.state.isAuthenticated){
-      content = <GameContainer />
-    }
-    else {
-      content = <LoginGizmo />
+    if (this.state.isAuthenticated) {
+      content = <GameContainer />;
+    } else {
+      if (this.state.newUser) {
+        content = <SignUpGizmo />;
+      } else {
+        content = <LoginGizmo />;
+      }
     }
 
     return (
       <div className="App">
-        <TitleBar title={"pew"} authenticated={this.state.isAuthenticated} />
-
-        {content}
-
+        <AppContext.Provider value={this.state}>
+          <TitleBar title={"pew"} />
+          {content}
+        </AppContext.Provider>
       </div>
     );
   }
