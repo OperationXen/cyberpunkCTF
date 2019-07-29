@@ -65,6 +65,12 @@ class LoginGizmo extends Component {
       });
   }
 
+  /**
+   * Why've you extracted this up into its own function? If the answer is
+   * because you intend to use it somewhere else, it should be its own
+   * component. If it's just to save space down in the component itself,
+   * it's not worth it!
+   */
   messageContents() {
     if (this.state.message) {
       return (
