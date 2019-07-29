@@ -49,6 +49,7 @@ class FlagWidget extends React.Component {
             disabled={!this.submitAvailable}
             onChange={this.handleChange}
             variant="outlined"
+            style={{borderRadius: "5px 0px 0px 5px"}}
           />
         </div>
         <div className="flagwidget-button">
@@ -60,7 +61,7 @@ class FlagWidget extends React.Component {
             color="primary"
             variant="contained"
             size="large"
-            style={{height: "3.5em"}}
+            style={{height: "3.8em", borderRadius: "0px 5px 5px 0px", marginLeft: "-5px"}}
             onSubmit={this.submitFlag}
           >
             Submit
