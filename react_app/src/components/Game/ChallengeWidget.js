@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Dialog from "@material-ui/core/Dialog";
 import Grid from "@material-ui/core/Grid";
 
-import FlagWidget from "components/Game/Flag";
+import FlagWidget from "components/Game/FlagWidget";
 
 import "styles/ChallengeWidget.css"
 
