@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Zoom from "@material-ui/core/Zoom";
 import Grow from "@material-ui/core/Grow";
+import Slide from "@material-ui/core/Slide";
 
 import "styles/Login.css";
 
@@ -78,6 +79,8 @@ class LoginGizmo extends Component {
   }
 
   render() {
+    const message = this.messageContents();
+
     return (
       <Zoom in={true}>
         <Container maxWidth="sm">
