@@ -1,11 +1,9 @@
 import React from "react";
 
-import InputAdornment from "@material-ui/core/InputAdornment";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 
-import FlagWidgetAdornmentIcon from "components/Game/FlagWidgetAdornment"
+import FlagWidgetAdornment from "components/Game/FlagWidgetAdornment";
 
 import "styles/FlagWidget.css";
 
@@ -14,37 +12,54 @@ class FlagWidget extends React.Component {
     super(props);
 
     this.state = {
-      answerOK: true,
+      answerOK: null,
       submitted: false,
 
       flagtext: "",
       message: ""
     };
 
-    this.submitFlag = this.submitFlag.bind(this);
+    this.keyPressed = this.keyPressed.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.submitAvailable = this.submitAvailable.bind(this);
+    this.submitFlag = this.submitFlag.bind(this);
+    this.isDisabled = this.isDisabled.bind(this);
+    this.getLabel = this.getLabel.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value, message: "" });
+    this.setState({ [event.target.name]: event.target.value, submitted: false, message: "" });
   }
 
   submitFlag(event) {
+    this.setState({submitted: true})
+    alert("submitting flag");
     // insert graphql mutation call here
   }
 
   isDisabled() {
-    return(this.state.answerOK || this.state.submitted)
+    return this.state.answerOK || this.state.submitted;
   }
 
   getLabel() {
-    if(this.state.answerOK === true) {
-      return("Solution Accepted")
+    if (this.state.answerOK === true) {
+      return "Solution Accepted";
     }
-    return("Flag")
+    return "Flag";
   }
 
-  submitAvailable() {}
+  keyPressed(event){
+    if(event.key == "Enter" && this.submitAvailable()) {
+      this.submitFlag()
+    }
+  }
+
+  submitAvailable() {
+    if (this.state.flagtext.length < 3 || this.isDisabled()) {
+      return false;
+    }
+    return true;
+  }
 
   render() {
     const flag = this.props.flag;
@@ -59,29 +74,37 @@ class FlagWidget extends React.Component {
           <TextField
             fullWidth
             id="flag-input"
-            name="flagInput"
-            label={() => this.getLabel}
+            name="flagtext"
+            label={this.getLabel()}
             placeholder={flag.guide ? flag.guide : "Flag"}
-            disabled={() => this.isDisabled}
-            onChange={() => this.handleChange}
+            disabled={this.isDisabled()}
+            onChange={this.handleChange}
+            onSubmit={this.submitFlag}
+            onKeyPress={this.keyPressed}
+            value={this.state.flagtext}
             variant="outlined"
-            style={this.state.answerOK ? {backgroundColor: "#00880020"} : { borderRadius: "5px 0px 0px 5px" }}
+            style={
+              this.state.answerOK
+                ? { backgroundColor: "#00880020" }
+                : { borderRadius: "5px 0px 0px 5px" }
+            }
             InputProps={{
               endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={this.submitFlag}
-                    disabled={this.submitAvailable}
-                  >
-                    <FlagWidgetAdornmentIcon correct={this.state.answerOK} submitted={this.state.submitted}/>
-                  </IconButton>
-                </InputAdornment>
+                <FlagWidgetAdornment
+                  action={this.submitFlag}
+                  active={this.submitAvailable()}
+                  correct={this.state.answerOK}
+                  submitted={this.state.submitted}
+                />
               )
             }}
           />
+          {this.state.message && (
+            <div className="flagwidget-message">
+              <Typography variant="caption">{this.state.message}</Typography>
+            </div>
+          )}
         </div>
-        {this.state.message && <Typography>{this.state.message}</Typography>}
       </div>
     );
   }
