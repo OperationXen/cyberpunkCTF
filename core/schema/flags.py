@@ -20,3 +20,19 @@ class FlagQuery(graphene.ObjectType):
 
     def resolve_flag(self, info, id, **kwargs):
         return BaseFlag.objects.get(pk=id)
+# #################################################################################################################### #
+
+
+class FlagSubmission(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID()
+        submission = graphene.String(required=True)
+
+    correct = graphene.Boolean()
+
+    def mutate(self, info, id, submission):
+        return FlagSubmission(correct=False)
+
+
+class FlagMutations(graphene.ObjectType):
+    submitflag = FlagSubmission.Field()
