@@ -1,3 +1,21 @@
-.flag-input{
+.flagwidget{
+    height: 4em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0.5em;
+}
+
+.flagwidget-input{
+    flex: 0 0 80%;
+    margin: auto;
+}
+
+.flagwidget-button{
+    flex: 0 0 20%;
+    margin: auto;
+}
+
+.flagwidget-message{
     text-align: left;
 }

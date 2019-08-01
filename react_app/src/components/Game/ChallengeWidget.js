@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Dialog from "@material-ui/core/Dialog";
 import Grid from "@material-ui/core/Grid";
 
-import FlagWidget from "components/Game/Flag";
+import FlagWidget from "components/Game/FlagWidget";
 
 import "styles/ChallengeWidget.css"
 
@@ -33,11 +33,11 @@ class ChallengeWidget extends React.Component {
     const challenge = this.props.details;
 
     return (
-      <div>
+      <div className= "challenge-display">
         <Dialog
           onClose={this.handleClose}
           aria-labelledby="challenge-dialog"
-          className="challenge-dialog"
+          PaperProps={{ className: "challenge-widget" }}
           open={true}
         >
           <DialogTitle id="challenge-dialog-title" onClose={this.handleClose}>
@@ -48,6 +48,7 @@ class ChallengeWidget extends React.Component {
               {challenge.content}
             </Typography>
           </DialogContent>
+          <FlagWidget flag={challenge.flags[0]}></FlagWidget>
           <DialogActions>Actions go here</DialogActions>
         </Dialog>
       </div>
