@@ -35,10 +35,11 @@ class BaseChallenge(models.Model):
 class Solve(models.Model):
     """ Record of each individual solve or solve attempt """
     datetime = DateTimeField(default=timezone.now, help_text="Date and Time the answer was submitted")
-    correct = BooleanField(blank=False, help_text="If the submission was correct or not")
     value = IntegerField(null=True, help_text="Points awarded for solving the challenge")
     first = BooleanField(default=False, help_text="True if this is the first solve for this challenge")
+    correct = BooleanField(blank=False, help_text="If the submission was correct or not")
+    attempt = CharField(blank=True, max_length=1024, help_text="The submitted attempt")
 
-    user = ForeignKey("CTFUser", related_name="solvers", on_delete=models.CASCADE, help_text="User who submitted the solve attempt")
+    user = ForeignKey("CTFUser", null=True, related_name="solvers", on_delete=models.CASCADE, help_text="User who submitted the solve attempt")
     challenge = ForeignKey("BaseChallenge", related_name="solve", on_delete=models.CASCADE, help_text="Challenge for which this solve was submitted")
     flag = ForeignKey("BaseFlag", related_name="solve", on_delete=models.CASCADE, help_text="Submitted flag")

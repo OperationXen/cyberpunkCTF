@@ -1,6 +1,8 @@
 import graphene
 from graphene_django.types import DjangoObjectType
 from core.models.flags import BaseFlag
+from core.models.challenges import Solve
+from core.processors import process_submission
 
 
 class BaseFlagType(DjangoObjectType):
@@ -21,6 +23,9 @@ class FlagQuery(graphene.ObjectType):
     def resolve_flag(self, info, id, **kwargs):
         return BaseFlag.objects.get(pk=id)
 # #################################################################################################################### #
+class SubmissionResultType(DjangoObjectType):
+    class Meta:
+        model = Solve
 
 
 class FlagSubmission(graphene.Mutation):
@@ -28,10 +33,11 @@ class FlagSubmission(graphene.Mutation):
         id = graphene.ID()
         submission = graphene.String(required=True)
 
-    correct = graphene.Boolean()
+    result = graphene.Field(SubmissionResultType)
 
     def mutate(self, info, id, submission):
-        return FlagSubmission(correct=False)
+        solve = process_submission(id, submission, info.context.user)
+        return FlagSubmission(result=solve)
 
 
 class FlagMutations(graphene.ObjectType):
