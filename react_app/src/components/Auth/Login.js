@@ -11,6 +11,8 @@ import Paper from "@material-ui/core/Paper";
 import Zoom from "@material-ui/core/Zoom";
 import Grow from "@material-ui/core/Grow";
 import Slide from "@material-ui/core/Slide";
+import { connect } from "react-redux";
+import { login } from "../../actions";
 
 import "styles/Login.css";
 
@@ -21,8 +23,7 @@ class LoginGizmo extends Component {
     super(props);
     this.state = {
       userName: "",
-      password: "",
-      message: ""
+      password: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -33,45 +34,20 @@ class LoginGizmo extends Component {
   }
 
   handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value, message: "" });
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-
-    fetch("/login", {
-      method: "POST",
-      credentials: "include",
-      body: new FormData(event.target)
-    })
-      .then(response => {
-        if (response.status == 200) {
-          response.json().then(response => {
-            this.context.update({
-              isAuthenticated: true,
-              userName: response.userName,
-              isAdmin: response.isAdmin
-            });
-          });
-        } else if (response.status == 500) {
-          this.setState({ message: "The server encountered an error" });
-        } else {
-          response.json().then(response => {
-            this.setState({ password: "", message: response.message });
-          });
-        }
-      })
-      .catch(error => {
-        this.setState({ message: "Unable to connect to server" });
-      });
+    this.props.login(new FormData(event.target));
   }
 
   messageContents() {
-    if (this.state.message) {
+    if (this.props.authErrorMessage) {
       return (
         <div>
           <Typography variant="caption" color="error">
-            {this.state.message}
+            {this.props.authErrorMessage}
           </Typography>
         </div>
       );
@@ -79,8 +55,6 @@ class LoginGizmo extends Component {
   }
 
   render() {
-    const message = this.messageContents();
-
     return (
       <Zoom in={true}>
         <Container maxWidth="sm">
@@ -136,4 +110,15 @@ class LoginGizmo extends Component {
   }
 }
 
-export default LoginGizmo;
+const mapStateToProps = state => ({
+  authErrorMessage: state.auth.errorMessage
+});
+
+const mapDispatchToProps = dispatch => ({
+  login: formData => dispatch(login(formData))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginGizmo);
