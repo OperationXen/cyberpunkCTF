@@ -83,6 +83,7 @@ class SignUpGizmo extends Component {
       if (response.status == 200) {
         response.json().then(response => {
           this.context.update(response);
+          this.context.update({isAuthenticated: true});
         });
       } else {
         response.json().then(response => {
