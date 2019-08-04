@@ -56,7 +56,7 @@ class LoginGizmo extends Component {
 
   render() {
     return (
-      <Zoom in={true}>
+      <Zoom in={!this.props.isAuthenticated}>
         <Container maxWidth="sm">
           <Paper className="login-gizmo">
             <div className="login-banner">
@@ -111,7 +111,8 @@ class LoginGizmo extends Component {
 }
 
 const mapStateToProps = state => ({
-  authErrorMessage: state.auth.errorMessage
+  authErrorMessage: state.auth.errorMessage,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({
