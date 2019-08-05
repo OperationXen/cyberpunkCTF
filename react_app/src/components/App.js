@@ -21,6 +21,7 @@ class App extends Component {
     };
   }
 
+  // at app load, check the current user's auth status
   componentWillMount() {
     store.dispatch(checkAuthentication());
   }

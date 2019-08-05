@@ -21,7 +21,7 @@ export function updateNewUser(newUser) {
 }
 
 export function login(formData) {
-  // Thunk
+  // Thunk middleware used to enable return of function
   return async dispatch => {
     dispatch({ type: "LOGIN" });
     try {
@@ -47,8 +47,9 @@ export function login(formData) {
   };
 }
 
+/* helper function first issues logout request, then fires the logout event to set state */
 export function logout() {
-  // Thunk
+  // Function wrapped uses Thunk middleware
   return async dispatch => {
     fetch("/logout", {
       method: "POST",
@@ -59,8 +60,9 @@ export function logout() {
   };
 }
 
+/* issue network request and then raise event depending on result */
 export function checkAuthentication() {
-  // Thunk
+  // Thunk middleware allows use of function here
   return async dispatch => {
     dispatch({ type: "CHECK_AUTHENTICATION" });
     try {
