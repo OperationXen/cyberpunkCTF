@@ -1,5 +1,7 @@
 import React from "react";
 
+import { submitFlag } from "actions/game.actions"
+
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 
@@ -32,9 +34,8 @@ class FlagWidget extends React.Component {
   }
 
   submitFlag(event) {
+    submitFlag(1, this.state.flagtext);
     this.setState({submitted: true})
-    alert("submitting flag");
-    // insert graphql mutation call here
   }
 
   isDisabled() {

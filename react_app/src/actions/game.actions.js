@@ -1,9 +1,16 @@
-import * as ActionTypes from "./actionTypes";
-import { Mutation } from "react-apollo";
+import React from "react";
+
+import * as ActionTypes from "actionTypes";
 import gql from "graphql-tag";
 
+import ApolloClient from "apollo-boost";
+
+const client = new ApolloClient({
+  uri: "/graphql/"
+});
+
 const FLAG_SUBMISSION_MUTATION = gql`
-  mutation FlagSubmission($id: Int!, $flag: String!) {
+  mutation submitflag($id: Int!, $flag: String!) {
     submitflag(id: $id, submission: $flag) {
       result {
         correct
@@ -14,12 +21,12 @@ const FLAG_SUBMISSION_MUTATION = gql`
   }
 `;
 
-function submitFlag(flagID, flagAttempt) {
-  return(
-    <Mutation mutation={FLAG_SUBMISSION_MUTATION}>
-        {(submitflag, {data, error, loading})} => {
-            //
-        }
-    </Mutation>
-  ) 
+export function submitFlag(flagid, flagAttempt) {
+  client
+    .mutate({ mutation: FLAG_SUBMISSION_MUTATION, variables: {id: flagid, flag: flagAttempt}})
+    .then(result => {
+      console.log(result);
+    });
+
+  return;
 }
