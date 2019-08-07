@@ -21,7 +21,10 @@ def current_solve_count(flag):
 def determine_flag_value(flag, solve_count):
     """ Calculate the points value for a successful solve """
     value = flag.challenge.value_start
-    decay_range = flag.challenge.value_start - flag.challenge.value_soft_floor
+
+    # Nice python shortcut, sets min_value to soft floor if it has a value, or value_start if it doesnt
+    min_value = flag.challenge.value_soft_floor or flag.challenge.value_start
+    decay_range = flag.challenge.value_start - min_value
 
     decayed = decay_range / solve_count if solve_count else 0
     value = value - decayed

@@ -25,8 +25,13 @@ export function submitFlag(flagid, flagAttempt) {
   client
     .mutate({ mutation: FLAG_SUBMISSION_MUTATION, variables: {id: flagid, flag: flagAttempt}})
     .then(result => {
-      console.log(result);
-    });
+        if (result.data.submitflag.result.correct){
+            alert("correct: " + result.data.submitflag.result.value )
+        } else {
+            alert("incorrect")
+        }
+    })
+    .finally();
 
   return;
 }

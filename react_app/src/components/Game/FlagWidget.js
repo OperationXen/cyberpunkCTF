@@ -34,7 +34,7 @@ class FlagWidget extends React.Component {
   }
 
   submitFlag(event) {
-    submitFlag(1, this.state.flagtext);
+    submitFlag(this.props.flag.id, this.state.flagtext);
     this.setState({submitted: true})
   }
 
