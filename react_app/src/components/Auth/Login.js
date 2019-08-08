@@ -12,7 +12,7 @@ import Zoom from "@material-ui/core/Zoom";
 import Grow from "@material-ui/core/Grow";
 import Slide from "@material-ui/core/Slide";
 import { connect } from "react-redux";
-import { login } from "../../actions";
+import { login } from "actions/auth.actions";
 
 import "styles/Login.css";
 

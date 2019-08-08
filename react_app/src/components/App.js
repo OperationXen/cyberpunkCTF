@@ -7,7 +7,7 @@ import AppDisplay from "./AppDisplay";
 
 import store from "../store";
 import { Provider as ReduxProvider } from "react-redux";
-import { checkAuthentication } from "../actions";
+import { checkAuthentication } from "actions/auth.actions";
 
 import "styles/App.css";
 

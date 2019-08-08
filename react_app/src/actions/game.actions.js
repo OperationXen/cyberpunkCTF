@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as ActionTypes from "actionTypes";
+import * as ActionTypes from "actions/actionTypes";
 import gql from "graphql-tag";
 
 import ApolloClient from "apollo-boost";
@@ -33,5 +33,5 @@ export function submitFlag(flagid, flagAttempt) {
     })
     .finally();
 
-  return;
+    return;
 }

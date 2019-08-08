@@ -1,4 +1,4 @@
-import * as ActionTypes from "./actionTypes";
+import * as ActionTypes from "actions/actionTypes";
 
 function checkAuthenticationSuccess(response) {
   return { type: ActionTypes.CHECK_AUTHENTICATION_SUCCESS, response };
