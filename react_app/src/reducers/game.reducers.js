@@ -26,6 +26,7 @@ export default (state = initialState, action) => {
         viewingChallenge: null
       };
     case ActionTypes.OPEN_CHALLENGE:
+        console.log("opening challenge... " + action.challengeID)
         return {
             viewingChallenge: action.challengeID
         };
@@ -33,5 +34,7 @@ export default (state = initialState, action) => {
         return {
             viewingChallenge: null
         };
+    default:
+        return state;
     }
 }

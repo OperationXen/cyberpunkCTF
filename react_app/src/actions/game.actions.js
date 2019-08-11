@@ -9,12 +9,12 @@ function getGameState(response) {
     return {type: ActionTypes.GET_GAME_STATE, response};
 }
 
-function openChallenge(data) {
-  return { type: ActionTypes.OPEN_CHALLENGE, data };
+export function openChallenge(data) {
+  return { type: ActionTypes.OPEN_CHALLENGE, challengeID: data };
 }
 
-function closeChallenge(data) {
-  return { type: ActionTypes.CLOSE_CHALLENGE, data };
+export function closeChallenge() {
+  return { type: ActionTypes.CLOSE_CHALLENGE };
 }
 
 const client = new ApolloClient({
