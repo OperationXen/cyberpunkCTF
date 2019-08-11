@@ -2,6 +2,7 @@ import React from "react";
 
 import { GameContext } from "Context";
 import { closeChallenge } from "actions/game.actions"
+import { connect } from "react-redux"
 
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -23,6 +24,11 @@ class ChallengeWidget extends React.Component {
     this.state = {
       open: true
     };
+    this.closeHandler = this.closeHandler.bind(this)
+  }
+
+  closeHandler(){
+    this.props.closeChallenge();
   }
 
   render() {
@@ -31,7 +37,7 @@ class ChallengeWidget extends React.Component {
     return (
       <div className= "challenge-display">
         <Dialog
-          onClose={this.props.closeChallenge()}
+          onClose={this.closeHandler}
           aria-labelledby="challenge-dialog"
           PaperProps={{ className: "challenge-widget" }}
           open={true}
@@ -52,4 +58,8 @@ class ChallengeWidget extends React.Component {
   }
 }
 
-export default ChallengeWidget;
+const mapDispatchToProps = dispatch => ({
+  closeChallenge: val => dispatch(closeChallenge(val))
+});
+
+export default connect(null, mapDispatchToProps)(ChallengeWidget);
