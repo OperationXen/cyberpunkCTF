@@ -20,13 +20,15 @@ const useStyles = makeStyles(theme => ({
 export default function CTFCategory(props) {
   const classes = useStyles();
 
-  const categoryColor = props.category.background ? props.category.background : "lightgrey"
-  if(props.category.challenges.length <= 0){
-    return null
+  const categoryColor = props.category.background
+    ? props.category.background
+    : "lightgrey";
+  if (props.category.challenges.length <= 0) {
+    return null;
   }
 
   return (
-    <Paper className={classes.root} style={{backgroundColor: categoryColor}}>
+    <Paper className={classes.root} style={{ backgroundColor: categoryColor }}>
       <Typography variant="h5" className={classes.titleText}>
         {props.category.title}
       </Typography>
