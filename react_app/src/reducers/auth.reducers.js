@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
       return {
         isAuthenticated: true,
         userName: action.response.userName,
-        isAdmin: action.response.isAdmin
+        isAdmin: action.response.privs
       };
 
     case ActionTypes.LOGIN_FAILED:
