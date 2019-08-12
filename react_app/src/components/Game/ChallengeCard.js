@@ -1,10 +1,10 @@
 import React from "react";
 
 import { GameContext } from "Context";
-import { openChallenge, closeChallenge } from "actions/game.actions"
+import { openChallenge } from "actions/game.actions"
 import {connect} from "react-redux"
 
-import CardActions from "@material-ui/core/CardActions";
+//import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";

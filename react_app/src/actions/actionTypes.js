@@ -10,6 +10,6 @@ export const UPDATE_NEW_USER = "UPDATE_NEW_USER";
 export const SUBMIT_FLAG = "SUBMIT_FLAG";
 
 /* Game control actions */
-export const GET_GAME_STATE = "GET_GAME_STATE"
+export const FETCH_GAME_STATE = "FETCH_GAME_STATE"
 export const OPEN_CHALLENGE = "OPEN_CHALLENGE"
 export const CLOSE_CHALLENGE = "CLOSE_CHALLENGE"

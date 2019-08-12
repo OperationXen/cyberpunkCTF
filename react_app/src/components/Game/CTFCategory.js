@@ -23,7 +23,7 @@ export default function CTFCategory(props) {
   const categoryColor = props.category.background
     ? props.category.background
     : "lightgrey";
-  if (props.category.challenges.length <= 0) {
+  if (props.category.challenges.length) {
     return null;
   }
 
