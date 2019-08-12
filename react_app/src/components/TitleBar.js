@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
@@ -8,6 +8,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AppBar from "@material-ui/core/AppBar";
 
 import ProfileButton from "components/ProfileButton";
+import PlayerDetails from "components/Misc/PlayerDetails";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,6 +37,7 @@ export default function TitleBar(props) {
           >
             <MenuIcon />
           </IconButton>
+          <PlayerDetails />
           <Typography variant="h6" className={classes.title}>
             {props.title}
           </Typography>

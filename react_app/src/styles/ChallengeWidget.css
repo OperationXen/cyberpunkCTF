@@ -1,3 +1,13 @@
+.challenge-display{
+    width: 50%;
+    margin: auto;
+}
+
 .challenge-dialog{
+
     border: 2px solid black;
+}
+
+.challenge-widget{
+    width: 100%;
 }

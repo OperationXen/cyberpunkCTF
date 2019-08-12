@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import AppContext from "Context";
-
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
@@ -9,18 +7,17 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Zoom from "@material-ui/core/Zoom";
+import { connect } from "react-redux";
+import { login } from "actions/auth.actions";
 
 import "styles/Login.css";
 
 class LoginGizmo extends Component {
-  static contextType = AppContext;
-
   constructor(props) {
     super(props);
     this.state = {
       userName: "",
-      password: "",
-      message: ""
+      password: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -31,36 +28,29 @@ class LoginGizmo extends Component {
   }
 
   handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value, message: "" });
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    this.props.login(new FormData(event.target));
+  }
 
-    fetch("/login", {
-      method: "POST",
-      credentials: "include",
-      body: new FormData(event.target)
-    }).then(response => {
-      if (response.status == 200) {
-        response.json().then(response => {
-          this.context.update({
-            isAuthenticated: true,
-            userName: response.userName,
-            isAdmin: response.isAdmin
-          });
-        });
-      } else {
-        response.json().then(response => {
-          this.setState({ password: "", message: response.message });
-        });
-      }
-    });
+  messageContents() {
+    if (this.props.authErrorMessage) {
+      return (
+        <div>
+          <Typography variant="caption" color="error">
+            {this.props.authErrorMessage}
+          </Typography>
+        </div>
+      );
+    }
   }
 
   render() {
     return (
-      <Zoom in={true}>
+      <Zoom in={!this.props.isAuthenticated}>
         <Container maxWidth="sm">
           <Paper className="login-gizmo">
             <div className="login-banner">
@@ -96,11 +86,7 @@ class LoginGizmo extends Component {
                 onChange={this.handleChange}
               />
               <br />
-              {this.state.message && (
-                <Typography variant="caption" color="error">
-                  {this.state.message}
-                </Typography>
-              )}
+              {this.messageContents()}
               <br />
               <Button
                 color="primary"
@@ -118,4 +104,16 @@ class LoginGizmo extends Component {
   }
 }
 
-export default LoginGizmo;
+const mapStateToProps = state => ({
+  authErrorMessage: state.auth.errorMessage,
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+const mapDispatchToProps = dispatch => ({
+  login: formData => dispatch(login(formData))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginGizmo);

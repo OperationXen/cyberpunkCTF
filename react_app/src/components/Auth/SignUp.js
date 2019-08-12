@@ -36,7 +36,7 @@ class SignUpGizmo extends Component {
   }
 
   validateForm(event) {
-    if (this.state.password1 == "" || this.state.password2 == "") {
+    if (this.state.password1 === "" || this.state.password2 === "") {
       return false;
     }
     return true;
@@ -70,7 +70,7 @@ class SignUpGizmo extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    if (this.state.password1 != this.state.password2) {
+    if (this.state.password1 !== this.state.password2) {
       this.setState({ message: "Passwords do not match..." });
       return false;
     }
@@ -80,9 +80,10 @@ class SignUpGizmo extends Component {
       credentials: "include",
       body: new FormData(event.target)
     }).then(response => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         response.json().then(response => {
           this.context.update(response);
+          this.context.update({isAuthenticated: true});
         });
       } else {
         response.json().then(response => {
