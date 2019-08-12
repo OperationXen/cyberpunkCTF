@@ -17,7 +17,7 @@ const initialState = {
 /* state param takes default of initialState if not otherwise set */
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.GET_GAME_STATE:
+    case ActionTypes.FETCH_GAME_STATE:
       return {
         ...state,                               // unpack state
         teamName: action.response.teamName,     // override those things that are set
