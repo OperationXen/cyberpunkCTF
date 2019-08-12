@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import AppContext from "Context";
-
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
@@ -15,8 +13,6 @@ import { login } from "actions/auth.actions";
 import "styles/Login.css";
 
 class LoginGizmo extends Component {
-  static contextType = AppContext;
-
   constructor(props) {
     super(props);
     this.state = {

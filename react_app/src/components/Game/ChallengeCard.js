@@ -1,6 +1,5 @@
 import React from "react";
 
-import { GameContext } from "Context";
 import { openChallenge } from "actions/game.actions"
 import {connect} from "react-redux"
 
@@ -16,8 +15,6 @@ import Card from "@material-ui/core/Card";
 import "styles/ChallengeCard.css";
 
 class ChallengeCard extends React.Component {
-  static contextType = GameContext;
-
   constructor(props) {
     super(props);
 
