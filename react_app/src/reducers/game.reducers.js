@@ -27,10 +27,12 @@ export default (state = initialState, action) => {
       };
     case ActionTypes.OPEN_CHALLENGE:
         return {
+            ...state,
             viewingChallenge: action.challengeID
         };
     case ActionTypes.CLOSE_CHALLENGE:
         return {
+            ...state,
             viewingChallenge: null
         };
     default:
