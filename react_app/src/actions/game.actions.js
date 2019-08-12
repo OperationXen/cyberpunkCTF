@@ -1,12 +1,9 @@
-import React from "react";
-
 import * as ActionTypes from "actions/actionTypes";
+import ctfApolloClient from "Services/Network/CTFApolloClient"
 import gql from "graphql-tag";
 
-import ApolloClient from "apollo-boost";
-
 function getGameState(response) {
-    return {type: ActionTypes.GET_GAME_STATE, response};
+    return {type: ActionTypes.FETCH_GAME_STATE, response};
 }
 
 export function openChallenge(data) {
@@ -16,10 +13,6 @@ export function openChallenge(data) {
 export function closeChallenge() {
   return { type: ActionTypes.CLOSE_CHALLENGE };
 }
-
-const client = new ApolloClient({
-  uri: "/graphql/"
-});
 
 const FLAG_SUBMISSION_MUTATION = gql`
   mutation submitflag($id: Int!, $flag: String!) {
@@ -34,7 +27,7 @@ const FLAG_SUBMISSION_MUTATION = gql`
 `;
 
 export function submitFlag(flagid, flagAttempt) {
-  client
+  ctfApolloClient
     .mutate({
       mutation: FLAG_SUBMISSION_MUTATION,
       variables: { id: flagid, flag: flagAttempt }
