@@ -50,7 +50,7 @@ class FlagWidget extends React.Component {
   }
 
   keyPressed(event){
-    if(event.key == "Enter" && this.submitAvailable()) {
+    if(event.key === "Enter" && this.submitAvailable()) {
       this.submitFlag()
     }
   }
@@ -65,7 +65,7 @@ class FlagWidget extends React.Component {
   render() {
     const flag = this.props.flag;
 
-    if (flag == undefined) {
+    if (flag === undefined) {
       return null;
     }
 

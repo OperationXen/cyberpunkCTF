@@ -9,8 +9,6 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Zoom from "@material-ui/core/Zoom";
-import Grow from "@material-ui/core/Grow";
-import Slide from "@material-ui/core/Slide";
 import { connect } from "react-redux";
 import { login } from "actions/auth.actions";
 

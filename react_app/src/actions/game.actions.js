@@ -2,7 +2,7 @@ import * as ActionTypes from "actions/actionTypes";
 import ctfApolloClient from "Services/Network/CTFApolloClient"
 import gql from "graphql-tag";
 
-function getGameState(response) {
+export function fetchGameState(response) {
     return {type: ActionTypes.FETCH_GAME_STATE, response};
 }
 

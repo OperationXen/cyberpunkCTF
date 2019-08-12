@@ -3,8 +3,6 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import { connect } from "react-redux";
 
-import { GameContext } from "Context";
-
 import Grid from "@material-ui/core/grid";
 
 import ChallengeWidget from "components/Game/ChallengeWidget";
@@ -76,10 +74,6 @@ const GET_CHALLENGE_DETAIL = gql`
 `;
 
 class GameContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="game-container">

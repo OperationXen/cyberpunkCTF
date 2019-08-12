@@ -1,6 +1,5 @@
 import React from "react";
 
-import { GameContext } from "Context";
 import { closeChallenge } from "actions/game.actions"
 import { connect } from "react-redux"
 
@@ -9,14 +8,12 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
 import Dialog from "@material-ui/core/Dialog";
-import Grid from "@material-ui/core/Grid";
 
 import FlagWidget from "components/Game/FlagWidget";
 
 import "styles/ChallengeWidget.css"
 
 class ChallengeWidget extends React.Component {
-  static contextType = GameContext;
 
   constructor(props) {
     super(props);

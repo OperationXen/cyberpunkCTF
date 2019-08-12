@@ -71,7 +71,7 @@ export function checkAuthentication() {
       })
         .then(response => response.json().then(body => ({ body, response })))
         .then(({ body, response }) => {
-          if (response.status == 200) {
+          if (response.status === 200) {
             dispatch(checkAuthenticationSuccess(body));
           } else {
             dispatch(checkAuthenticationFailed(body.message));

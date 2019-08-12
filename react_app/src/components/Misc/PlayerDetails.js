@@ -4,10 +4,6 @@ import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 
 class PlayerDetails extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   getUserName() {
     return this.props.userName;
   }
