@@ -30,7 +30,7 @@ class SubmissionResultType(DjangoObjectType):
 
 class FlagSubmission(graphene.Mutation):
     class Arguments:
-        id = graphene.ID()
+        id = graphene.Int()
         submission = graphene.String(required=True)
 
     result = graphene.Field(SubmissionResultType)

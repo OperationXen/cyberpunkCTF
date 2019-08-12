@@ -1,6 +1,9 @@
 import { combineReducers } from "redux";
-import authReducers from "./auth.reducers";
+import authReducers from "reducers/auth.reducers";
+import gameReducers from "reducers/game.reducers"
 
+// Combine multiple reducer functions for one state representation
 export default combineReducers({
-  auth: authReducers
+  auth: authReducers,
+  game: gameReducers
 });

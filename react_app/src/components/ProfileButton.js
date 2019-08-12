@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
 import Button from "@material-ui/core/Button";
-import { logout, updateNewUser } from "../actions";
+import { logout, updateNewUser } from "actions/auth.actions";
 import { connect } from "react-redux";
 
 class ProfileButton extends React.Component {

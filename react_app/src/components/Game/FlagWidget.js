@@ -1,5 +1,7 @@
 import React from "react";
 
+import { submitFlag } from "actions/game.actions"
+
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 
@@ -32,9 +34,8 @@ class FlagWidget extends React.Component {
   }
 
   submitFlag(event) {
+    submitFlag(this.props.flag.id, this.state.flagtext);
     this.setState({submitted: true})
-    alert("submitting flag");
-    // insert graphql mutation call here
   }
 
   isDisabled() {
@@ -49,7 +50,7 @@ class FlagWidget extends React.Component {
   }
 
   keyPressed(event){
-    if(event.key == "Enter" && this.submitAvailable()) {
+    if(event.key === "Enter" && this.submitAvailable()) {
       this.submitFlag()
     }
   }
@@ -64,7 +65,7 @@ class FlagWidget extends React.Component {
   render() {
     const flag = this.props.flag;
 
-    if (flag == undefined) {
+    if (flag === undefined) {
       return null;
     }
 

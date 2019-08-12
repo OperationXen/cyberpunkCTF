@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import AppContext from "Context";
-
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
@@ -9,16 +7,12 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Zoom from "@material-ui/core/Zoom";
-import Grow from "@material-ui/core/Grow";
-import Slide from "@material-ui/core/Slide";
 import { connect } from "react-redux";
-import { login } from "../../actions";
+import { login } from "actions/auth.actions";
 
 import "styles/Login.css";
 
 class LoginGizmo extends Component {
-  static contextType = AppContext;
-
   constructor(props) {
     super(props);
     this.state = {
@@ -56,7 +50,7 @@ class LoginGizmo extends Component {
 
   render() {
     return (
-      <Zoom in={true}>
+      <Zoom in={!this.props.isAuthenticated}>
         <Container maxWidth="sm">
           <Paper className="login-gizmo">
             <div className="login-banner">
@@ -111,7 +105,8 @@ class LoginGizmo extends Component {
 }
 
 const mapStateToProps = state => ({
-  authErrorMessage: state.auth.errorMessage
+  authErrorMessage: state.auth.errorMessage,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({

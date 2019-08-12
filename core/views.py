@@ -38,6 +38,8 @@ class AuthLoginView(View):
                 # set the user in the session to be handed back to the user
                 login(request, user)
                 dict["message"] = "Successfully authenticated"
+                dict["userName"] = username
+                dict["privs"] = None
                 return JsonResponse(dict, status=200)
 
         except Exception as e:

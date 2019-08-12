@@ -3,15 +3,9 @@ import React, { Component } from "react";
 import { Forward, HourglassFull, Error, Check } from "@material-ui/icons";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import { isFlowPredicate } from "@babel/types";
 
 // Object Oriented Programming uses classes to represent objects. NOT functions.
-class FlagWidgetAdornment extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+class FlagWidgetAdornment extends Component{
   buttonIcon() {
     if (this.props.correct === true) {
       return <Check />;
