@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
@@ -23,7 +23,7 @@ export default function CTFCategory(props) {
   const categoryColor = props.category.background
     ? props.category.background
     : "lightgrey";
-  if (props.category.challenges.length) {
+  if (!props.category.challenges.length) {
     return null;
   }
 
