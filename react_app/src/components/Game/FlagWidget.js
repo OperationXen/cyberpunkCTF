@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux"
 
 import { submitFlag } from "actions/flag.actions"
 
@@ -34,7 +35,7 @@ class FlagWidget extends React.Component {
   }
 
   submitFlag(event) {
-    submitFlag(this.props.flag.id, this.state.flagtext);
+    this.props.submitFlag(this.props.flag.id, this.state.flagtext);
     this.setState({submitted: true})
   }
 
@@ -111,4 +112,10 @@ class FlagWidget extends React.Component {
   }
 }
 
-export default FlagWidget;
+const mapDispatchToProps = function(dispatch) {
+  return {
+    submitFlag: (id, data) => { dispatch(submitFlag(id, data)) }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(FlagWidget);

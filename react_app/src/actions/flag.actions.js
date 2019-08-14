@@ -23,19 +23,19 @@ const FLAG_SUBMISSION_MUTATION = gql`
 `;
 
 export function submitFlag(flagid, flagAttempt) {
-  ctfApolloClient
-    .mutate({
-      mutation: FLAG_SUBMISSION_MUTATION,
-      variables: { id: flagid, flag: flagAttempt }
-    })
-    .then(result => {
-      if (result.data.submitflag.result.correct) {
-        return (submitFlagSuccess(result.data.submitflag.result));
-      } else {
-        return (submitFlagFailure(result.data.submitflag.result));
-      }
-    })
-    .finally();
-
-  return;
+  return async dispatch => {
+    ctfApolloClient
+      .mutate({
+        mutation: FLAG_SUBMISSION_MUTATION,
+        variables: { id: flagid, flag: flagAttempt }
+      })
+      .then(result => {
+        if (result.data.submitflag.result.correct) {
+          dispatch(submitFlagSuccess(result.data.submitflag.result));
+        } else {
+          dispatch(submitFlagFailure(result.data.submitflag.result));
+        }
+      })
+      .finally();
+  };
 }
