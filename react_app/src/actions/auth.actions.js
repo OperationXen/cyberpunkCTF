@@ -38,7 +38,7 @@ export function login(formData) {
             dispatch(loginFailed(body.message));
           }
         })
-        .catch((error) => {
+        .catch(error => {
           dispatch(loginFailed("Unable to connect to server"));
         });
     } catch (err) {

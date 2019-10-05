@@ -104,12 +104,12 @@ class LoginGizmo extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   authErrorMessage: state.auth.errorMessage,
   isAuthenticated: state.auth.isAuthenticated
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   login: formData => dispatch(login(formData))
 });
 
