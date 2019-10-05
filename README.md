@@ -2,6 +2,8 @@
 
 A CTF framework built on python using django, graphql and react
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/13bc9fd07dd94afaa3078d9ffd9644f6)](https://www.codacy.com/manual/OperationXen/cyberpunkCTF?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OperationXen/cyberpunkCTF&amp;utm_campaign=Badge_Grade)
+
 ## Requirements
 
 - Python 3
