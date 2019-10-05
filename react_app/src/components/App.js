@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   // at app load, check the current user's auth status
-  componentWillMount() {
+  componentDidMount() {
     store.dispatch(checkAuthentication());
   }
 

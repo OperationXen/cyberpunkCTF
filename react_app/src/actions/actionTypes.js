@@ -8,6 +8,8 @@ export const UPDATE_NEW_USER = "UPDATE_NEW_USER";
 
 /* Flag submission actions */
 export const SUBMIT_FLAG = "SUBMIT_FLAG";
+export const SUBMIT_FLAG_SUCCESS = "SUBMIT_FLAG_SUCCESS"
+export const SUBMIT_FLAG_FAILURE = "SUBMIT_FLAG_FAILURE"
 
 /* Game control actions */
 export const FETCH_GAME_STATE = "FETCH_GAME_STATE"
