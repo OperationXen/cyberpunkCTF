@@ -30,7 +30,7 @@ export function login(formData) {
         credentials: "include",
         body: formData
       })
-        .then(response => response.json().then(body => ({ body, response })))
+        .then(response => response.json().then((body) => ({ body, response })))
         .then(({ body, response }) => {
           if (response.status === 200) {
             dispatch(loginSuccess(body));
@@ -38,7 +38,7 @@ export function login(formData) {
             dispatch(loginFailed(body.message));
           }
         })
-        .catch(error => {
+        .catch((error) => {
           dispatch(loginFailed("Unable to connect to server"));
         });
     } catch (err) {
