@@ -10,6 +10,8 @@ import AppBar from "@material-ui/core/AppBar";
 import ProfileButton from "components/ProfileButton";
 import PlayerDetails from "components/Misc/PlayerDetails";
 
+import StackingNotification from "components/Notifiations/StackingNotification";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -27,6 +29,7 @@ export default function TitleBar(props) {
 
   return (
     <div className={classes.root}>
+      <StackingNotification message="Pew pew" />
       <AppBar position="static">
         <Toolbar>
           <IconButton
