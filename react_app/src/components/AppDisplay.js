@@ -1,3 +1,6 @@
+import { Switch, Route } from "react-router-dom";
+import { Redirect } from "react-router";
+
 import GameContainer from "components/Game/GameContainer";
 import SignUpGizmo from "components/Auth/SignUp";
 import LoginGizmo from "components/Auth/Login";
@@ -5,19 +8,29 @@ import { connect } from "react-redux";
 
 import React from "react";
 
-const AppDisplay = ({ isAuthenticated, newUser }) => {
-  if (isAuthenticated) return <GameContainer />;
-
-  if (newUser) {
-    return <SignUpGizmo />;
+const AppDisplay = ({ isAuthenticated }) => {
+  //Present the game component to authenticated users
+  if (isAuthenticated) {
+    return <GameContainer />;
   } else {
-    return <LoginGizmo />;
+    return (
+      //Present the relevant widget depending on path - login or register
+      <Switch>
+        <Route path="/login">
+          <LoginGizmo />
+        </Route>
+        <Route path="/register">
+          <SignUpGizmo />
+        </Route>
+        {/*If not logged in, default to pushing user to login page*/}
+        <Route render={() => <Redirect to="/login" />} />
+      </Switch>
+    );
   }
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  newUser: state.auth.newUser
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps)(AppDisplay);
