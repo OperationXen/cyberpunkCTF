@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
@@ -43,9 +42,7 @@ export default function TitleBar(props) {
             {props.title}
           </Typography>
 
-          <Router>
-            <ProfileButton />
-          </Router>
+          <ProfileButton />
         </Toolbar>
       </AppBar>
     </div>

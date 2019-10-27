@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { withRouter } from "react-router";
 
 import Button from "@material-ui/core/Button";
@@ -17,13 +17,11 @@ class ProfileButton extends React.Component {
   /* When existing user wants to log in not register */
   existingUser() {
     this.props.history.push("/login");
-    //this.props.updateNewUser(false);
   }
 
   /* New user wishes to sign up */
   newUser() {
     this.props.history.push("/register");
-    //this.props.updateNewUser(true);
   }
 
   render() {
@@ -40,7 +38,6 @@ class ProfileButton extends React.Component {
               Login Existing User
             </Button>
           </Route>
-          <Route render={() => <Redirect to="/login" />} />
         </Switch>
       );
     } else {
@@ -54,12 +51,10 @@ class ProfileButton extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  newUser: state.auth.newUser
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateNewUser: val => dispatch(updateNewUser(val)),
   logout: () => dispatch(logout())
 });
 

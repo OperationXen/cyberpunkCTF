@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { BrowserRouter as Router } from "react-router-dom";
 import AppContext from "Context";
 
 import TitleBar from "components/TitleBar";
@@ -31,8 +31,10 @@ class App extends Component {
       <div className="App">
         <ReduxProvider store={store}>
           <AppContext.Provider value={this.state}>
-            <TitleBar title={"pew"} />
-            <AppDisplay />
+            <Router>
+              <TitleBar title={"pew"} />
+              <AppDisplay />
+            </Router>
           </AppContext.Provider>
         </ReduxProvider>
       </div>
