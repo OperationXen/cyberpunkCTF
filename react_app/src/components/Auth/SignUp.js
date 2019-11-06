@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Redirect } from "react-router";
+import { connect } from "react-redux";
 import AppContext from "Context";
 
 import Typography from "@material-ui/core/Typography";
@@ -83,7 +85,7 @@ class SignUpGizmo extends Component {
       if (response.status === 200) {
         response.json().then(response => {
           this.context.update(response);
-          this.context.update({isAuthenticated: true});
+          this.context.update({ isAuthenticated: true });
         });
       } else {
         response.json().then(response => {
@@ -116,10 +118,13 @@ class SignUpGizmo extends Component {
   }
 
   render() {
+    if (this.props.isAuthenticated) {
+      return <Redirect to={{ pathname: "/" }} />;
+    }
     return (
       <Zoom in={true}>
         <Container maxWidth="sm" className="signup-gizmo">
-          <Paper>
+          <Paper elevation={12}>
             <div className="signup-banner">
               <Typography variant="h5">Register Account</Typography>
             </div>
@@ -211,4 +216,8 @@ class SignUpGizmo extends Component {
   }
 }
 
-export default SignUpGizmo;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps)(SignUpGizmo);
