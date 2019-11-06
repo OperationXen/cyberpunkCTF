@@ -7,26 +7,25 @@ import LoginGizmo from "components/Auth/Login";
 import { connect } from "react-redux";
 
 import React from "react";
+import GameContext from "Context";
 
 const AppDisplay = ({ isAuthenticated }) => {
   //Present the game component to authenticated users
-  if (isAuthenticated) {
-    return <GameContainer />;
-  } else {
-    return (
-      //Present the relevant widget depending on path - login or register
-      <Switch>
-        <Route path="/login">
-          <LoginGizmo />
-        </Route>
-        <Route path="/register">
-          <SignUpGizmo />
-        </Route>
-        {/*If not logged in, default to pushing user to login page*/}
-        <Route render={() => <Redirect to="/login" />} />
-      </Switch>
-    );
-  }
+  return (
+    //Present the relevant widget depending on path - login or register
+    <Switch>
+      <Route path="/login">
+        <LoginGizmo />
+      </Route>
+      <Route path="/register">
+        <SignUpGizmo />
+      </Route>
+      {/*If not logged in, default to pushing user to login page*/}
+      <Route>
+        <GameContainer />
+      </Route>
+    </Switch>
+  );
 };
 
 const mapStateToProps = state => ({

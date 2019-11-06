@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
+import { Redirect } from "react-router";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
@@ -49,10 +50,13 @@ class LoginGizmo extends Component {
   }
 
   render() {
+    if (this.props.isAuthenticated) {
+      return <Redirect to={{ pathname: "/" }} />;
+    }
     return (
       <Zoom in={!this.props.isAuthenticated}>
         <Container maxWidth="sm">
-          <Paper className="login-gizmo">
+          <Paper className="login-gizmo" elevation={12}>
             <div className="login-banner">
               <Typography variant="h5">Authentication Required</Typography>
             </div>
@@ -104,12 +108,12 @@ class LoginGizmo extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   authErrorMessage: state.auth.errorMessage,
   isAuthenticated: state.auth.isAuthenticated
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   login: formData => dispatch(login(formData))
 });
 
