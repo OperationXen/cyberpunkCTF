@@ -5,7 +5,7 @@ graphene==2.1.8
 graphene-django==2.6.0
 graphql-core==2.2.1
 graphql-relay==2.0.0
-Pillow==6.2.1
+Pillow==9.0.1
 promise==2.2.1
 psycopg2-binary==2.8.4
 pytz==2019.3
